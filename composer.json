@@ -1,0 +1,8 @@
+{
+  "name": "openactive/dataset-site-template-php",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "mustache/mustache": "^2.12"
+  }
+}
