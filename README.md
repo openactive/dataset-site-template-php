@@ -11,6 +11,8 @@ While most of the functionality should work down to PHP 5.4, some functionality 
 
 [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) is also required for dependency management.
 
+This project also makes use of [Mustache](https://github.com/bobthecow/mustache.php) for rendering the template (installed via Composer).
+
 ## Development
 
 ### Installation
@@ -19,6 +21,15 @@ git clone https://github.com/openactive/dataset-site-template-php.git
 cd dataset-site-template-php
 composer install
 ```
+
+### Usage
+The template is included under the `src` folder.
+
+The JSON-LD payload used for rendering this example is under `example.json`.
+
+From a web server capable of interpreting and compiling PHP, navigate to the `/openactive` folder.
+
+From there you should be able to see the template populated with the JSON-LD data.
 
 ### Running Tests
 PHPUnit 4.8 is used to run tests.
