@@ -9,5 +9,13 @@
     "psr-4": {
       "OpenActive\\DatasetSiteTemplate\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OpenActive\\DatasetSiteTemplate\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
   }
 }
