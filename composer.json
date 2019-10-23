@@ -4,5 +4,10 @@
   "license": "MIT",
   "require": {
     "mustache/mustache": "^2.12"
+  },
+  "autoload": {
+    "psr-4": {
+      "OpenActive\\DatasetSiteTemplate\\": "src/"
+    }
   }
 }
