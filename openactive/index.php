@@ -29,6 +29,7 @@ $data = array(
     "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "platformName" => "AcmeBooker",
     "platformUrl" => "https://acmebooker.example.com/",
+    "softwareVersion" => "0.1.0",
 );
 
 // Render compiled template with data

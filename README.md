@@ -78,6 +78,7 @@ $data = array(
     "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "platformName" => "AcmeBooker",
     "platformUrl" => "https://acmebooker.example.com/",
+    "softwareVersion" => "1.2.3",
 );
 ```
 
@@ -107,6 +108,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 - **documentationUrl** - TBC. should this be a parameter?
 - **platformName** - TBC. should this be a parameter?
 - **platformUrl** - TBC. should this be a parameter?
+- **softwareVersion** - The platform's software version.
 
 #### `renderDatasetSite($dataset, $additionalData)`
 
@@ -119,6 +121,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 - **documentationUrl** - TBC. should this be a parameter?
 - **platformName** - TBC. should this be a parameter?
 - **platformUrl** - TBC. should this be a parameter?
+- **softwareVersion** - The platform's software version.
 
 ## Development
 
