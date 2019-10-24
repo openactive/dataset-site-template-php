@@ -35,6 +35,91 @@ projects
 |--- ...
 ```
 
+## Usage
+
+**Please Note:** This instruction are temporary and based on the current development status.
+
+If you are developing this package, go to the [Development](#development) section.
+
+To install from terminal, run:
+```bash
+composer require openactive/dataset-site-template-php
+```
+
+Wherever you want to render your Dataset page, include the following instructions:
+```php
+use OpenActive\DatasetSiteTemplate\TemplateRenderer;
+
+// Render compiled template with data
+echo (new TemplateRenderer())->renderSimpleDatasetSite($data);
+```
+
+Where `$data` could be defined like the following (as an example):
+```php
+$data = array(
+    "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+    // TODO: Where does bookingBaseUrl go?
+    "bookingBaseUrl" => "https://ourparks.org.uk/openbooking/",
+    "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
+    "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
+    "email" => "hello@ourparks.org.uk",
+    "includeCourseInstanceFeed" => false,
+    "includeEventFeed" => false,
+    "includeScheduledSessionFeed" => true,
+    "includeSessionSeriesFeed" => true,
+    "legalEntity" => "Our Parks",
+    "name" => "Our Parks Sessions",
+    "openDataBaseUrl" => "https://ourparks.org.uk/opendata/",
+    "organisationLogoUrl" => "https://ourparks.org.uk/logo.png",
+    "organisationName" => "Our Parks",
+    "organisationUrl" => "https://ourparks.org.uk/",
+    "plainTextDescription" => "Our Parks - turn up tone up!",
+    // TODO: should documentationUrl, platformName, and platformUrl be a parameter?
+    "documentationUrl" => "https://ourparks.org.uk/openbooking/",
+    "platformName" => "AcmeBooker",
+    "platformUrl" => "https://acmebooker.example.com/",
+);
+```
+
+### API
+
+#### `renderSimpleDatasetSite($data)`
+
+Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$data`.
+
+`$data` must contain the following keys:
+- **backgroundImageUrl** - The background image to show on the page;
+- **bookingBaseUrl** - TBC. TODO: Where does `bookingBaseUrl` go?
+- **datasetSiteDiscussionUrl** - The discussion URL for the dataset
+- **datasetSiteUrl** - The dataset site URL
+- **email** - The email of the publisher of this dataset;
+- **includeCourseInstanceFeed** - Whether or not to include the `CourseInstance` feed link;
+- **includeEventFeed** - Whether or not to include the `Event` feed link;
+- **includeScheduledSessionFeed** - Whether or not to include the `ScheduledSession` feed link;
+- **includeSessionSeriesFeed** - Whether or not to include the `SessionSeries` feed link;
+- **legalEntity** - The legal name of the publisher of this dataset;
+- **name** - The name of the publisher of this dataset;
+- **openDataBaseUrl** - The base OpenData URL for this dataset. This URL is used as a base URL for the feeds;
+- **organisationLogoUrl** - A valid image URL of the organisation's logo;
+- **organisationName** - The organisation's name;
+- **organisationUrl** - The organisation's URL;
+- **plainTextDescription** - TBC. TODO where is this used?
+- **documentationUrl** - TBC. should this be a parameter?
+- **platformName** - TBC. should this be a parameter?
+- **platformUrl** - TBC. should this be a parameter?
+
+#### `renderDatasetSite($dataset, $additionalData)`
+
+Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$data`.
+
+`$dataset` must be a valid `\OpenActive\Models\SchemaOrg\Dataset` model.
+
+`$additionalData` must be an associative array with the following keys:
+- **backgroundImageUrl** - The background image to show on the page;
+- **documentationUrl** - TBC. should this be a parameter?
+- **platformName** - TBC. should this be a parameter?
+- **platformUrl** - TBC. should this be a parameter?
+
 ## Development
 
 ### Installation
