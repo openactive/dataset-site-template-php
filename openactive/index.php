@@ -26,7 +26,6 @@ $data = array(
     "organisationName" => "Our Parks",
     "organisationUrl" => "https://ourparks.org.uk/",
     "plainTextDescription" => "Our Parks - turn up tone up!",
-    // TODO: should documentationUrl, platformName, and platformUrl be a parameter?
     "platformName" => "AcmeBooker",
     "platformUrl" => "https://acmebooker.example.com/",
     "softwareVersion" => "0.1.0",

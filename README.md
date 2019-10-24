@@ -75,7 +75,6 @@ $data = array(
     "organisationName" => "Our Parks",
     "organisationUrl" => "https://ourparks.org.uk/",
     "plainTextDescription" => "Our Parks - turn up tone up!",
-    // TODO: should documentationUrl, platformName, and platformUrl be a parameter?
     "platformName" => "AcmeBooker",
     "platformUrl" => "https://acmebooker.example.com/",
     "softwareVersion" => "1.2.3",
@@ -105,9 +104,9 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 - **organisationLogoUrl** - A valid image URL of the organisation's logo;
 - **organisationName** - The organisation's name;
 - **organisationUrl** - The organisation's URL;
-- **plainTextDescription** - TBC. TODO where is this used?
-- **platformName** - TBC. should this be a parameter?
-- **platformUrl** - TBC. should this be a parameter?
+- **plainTextDescription** - The publisher's description in plain text;
+- **platformName** - The platform's name;
+- **platformUrl** - The platform's URL;
 - **softwareVersion** - The platform's software version.
 
 #### `renderDatasetSite($dataset, $additionalData)`
@@ -118,9 +117,9 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 
 `$additionalData` must be an associative array with the following keys:
 - **backgroundImageUrl** - The background image to show on the page;
-- **platformName** - TBC. should this be a parameter?
-- **platformUrl** - TBC. should this be a parameter?
 - **documentationUrl** - The documentation's URL;
+- **platformName** - The platform's name;
+- **platformUrl** - The platform's URL;
 - **softwareVersion** - The platform's software version.
 
 ## Development
