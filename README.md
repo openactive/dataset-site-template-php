@@ -62,6 +62,7 @@ $data = array(
     "bookingBaseUrl" => "https://ourparks.org.uk/openbooking/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
+    "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "email" => "hello@ourparks.org.uk",
     "includeCourseInstanceFeed" => false,
     "includeEventFeed" => false,
@@ -75,7 +76,6 @@ $data = array(
     "organisationUrl" => "https://ourparks.org.uk/",
     "plainTextDescription" => "Our Parks - turn up tone up!",
     // TODO: should documentationUrl, platformName, and platformUrl be a parameter?
-    "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "platformName" => "AcmeBooker",
     "platformUrl" => "https://acmebooker.example.com/",
     "softwareVersion" => "1.2.3",
@@ -93,6 +93,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 - **bookingBaseUrl** - TBC. TODO: Where does `bookingBaseUrl` go?
 - **datasetSiteDiscussionUrl** - The discussion URL for the dataset
 - **datasetSiteUrl** - The dataset site URL
+- **documentationUrl** - The documentation's URL;
 - **email** - The email of the publisher of this dataset;
 - **includeCourseInstanceFeed** - Whether or not to include the `CourseInstance` feed link;
 - **includeEventFeed** - Whether or not to include the `Event` feed link;
@@ -105,7 +106,6 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 - **organisationName** - The organisation's name;
 - **organisationUrl** - The organisation's URL;
 - **plainTextDescription** - TBC. TODO where is this used?
-- **documentationUrl** - TBC. should this be a parameter?
 - **platformName** - TBC. should this be a parameter?
 - **platformUrl** - TBC. should this be a parameter?
 - **softwareVersion** - The platform's software version.
@@ -118,9 +118,9 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 
 `$additionalData` must be an associative array with the following keys:
 - **backgroundImageUrl** - The background image to show on the page;
-- **documentationUrl** - TBC. should this be a parameter?
 - **platformName** - TBC. should this be a parameter?
 - **platformUrl** - TBC. should this be a parameter?
+- **documentationUrl** - The documentation's URL;
 - **softwareVersion** - The platform's software version.
 
 ## Development

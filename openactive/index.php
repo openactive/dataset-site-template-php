@@ -13,6 +13,7 @@ $data = array(
     "bookingBaseUrl" => "https://ourparks.org.uk/openbooking/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
+    "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "email" => "hello@ourparks.org.uk",
     "includeCourseInstanceFeed" => false,
     "includeEventFeed" => false,
@@ -26,7 +27,6 @@ $data = array(
     "organisationUrl" => "https://ourparks.org.uk/",
     "plainTextDescription" => "Our Parks - turn up tone up!",
     // TODO: should documentationUrl, platformName, and platformUrl be a parameter?
-    "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "platformName" => "AcmeBooker",
     "platformUrl" => "https://acmebooker.example.com/",
     "softwareVersion" => "0.1.0",
