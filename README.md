@@ -5,6 +5,15 @@ Tools intended to simplify creation of dataset sites using templates.
 
 For comparison, see the [.NET](https://github.com/openactive/dataset-site-template-example-dotnet) and [Ruby](https://github.com/openactive/dataset-site-template-ruby) implementations.
 
+## Table Of Contents
+- [Requirements](#requirements)
+- [Usage](#usage)
+    - [API](#api)
+- [Development](#development)
+    - [Installation](#installation)
+    - [Example](#example)
+    - [Running Tests](#running-tests)
+
 ## Requirements
 This project requires PHP >=5.6.
 While most of the functionality should work down to PHP 5.4, some functionality (especially around parsing of offset for DateTimeZone) will not work with that version of PHP (see the [DateTimeZone PHP docs](https://www.php.net/manual/en/datetimezone.construct.php#refsect1-datetimezone.construct-changelog) for more info).
@@ -13,7 +22,7 @@ While most of the functionality should work down to PHP 5.4, some functionality 
 
 This project also makes use of [Mustache](https://github.com/bobthecow/mustache.php) for rendering the template (installed via Composer).
 
-**Temporary** You will also need a local copy of the [`models-php`](https://github.com/openactive/models-php) repo.
+**Temporary:** You will also need a local copy of the [`models-php`](https://github.com/openactive/models-php) repo.
 
 This repository and the `models-php` will need to co-exist in the same parent directory, for example:
 ```
@@ -35,14 +44,14 @@ cd dataset-site-template-php
 composer install
 ```
 
-### Usage
-The template is included under the `src` folder.
-
-The JSON-LD payload used for rendering this example is under `example.json`.
-
+### Example
 From a web server capable of interpreting and compiling PHP, navigate to the `/openactive` folder.
 
 From there you should be able to see the template populated with the JSON-LD data.
+
+The default mustache template (`datasetsite.mustache`) is included under the `src` folder.
+
+In `index.php` you can find an example of the associative array that's going to get parsed by `TemplateRenderer`.
 
 ### Running Tests
 PHPUnit 4.8 is used to run tests.
