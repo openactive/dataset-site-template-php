@@ -128,11 +128,10 @@ class TemplateRenderer
 
         // data that does not belong to the Dataset model but needs rendering anyway
         $additionalData = array(
-            "backgroundImage" => $data["backgroundImageUrl"],
-            "documentation" => $data["documentationUrl"],
+            "backgroundImageUrl" => $data["backgroundImageUrl"],
+            "documentationUrl" => $data["documentationUrl"],
             "platformName" => $data["platformName"],
             "platformUrl" => $data["platformUrl"],
-            "softwareVersion" => Meta::VERSION,
         );
 
         // Render compiled template with JSON-LD data
@@ -160,7 +159,13 @@ class TemplateRenderer
         $template = file_get_contents(__DIR__."/datasetsite.mustache");
 
         // Build data from model's getters
-        $data = $additionalData;
+        $data = array(
+            "backgroundImage" => $additionalData["backgroundImageUrl"],
+            "documentation" => $additionalData["documentationUrl"],
+            "platformName" => $additionalData["platformName"],
+            "platformUrl" => $additionalData["platformUrl"],
+            "softwareVersion" => Meta::VERSION,
+        );
         $attributeNames = array(
             "description",
             "discussionUrl",
