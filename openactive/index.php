@@ -6,7 +6,6 @@ use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 
 // Get JSON-LD data
 
-echo (new TemplateRenderer())->render($data);
 // Create new dataset
 $data = array(
     "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
@@ -33,3 +32,4 @@ $data = array(
 );
 
 // Render compiled template with data
+echo (new TemplateRenderer())->renderSimpleDatasetSite($data);
