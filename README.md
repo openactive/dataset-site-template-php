@@ -125,6 +125,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 #### `DistributionType`
 
 A class containing the supported distribution types:
+
 | Constant                  | Value                   |
 | ------------------------- | ----------------------- |
 | `COURSE`                  | `Course`                |
