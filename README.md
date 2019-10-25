@@ -91,23 +91,26 @@ $data = array(
 Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$data`.
 
 `$data` must contain the following keys:
-- **backgroundImageUrl** - The background image to show on the page;
-- **bookingBaseUrl** - TBC. TODO: Where does `bookingBaseUrl` go?
-- **datasetSiteDiscussionUrl** - The discussion URL for the dataset
-- **datasetSiteUrl** - The dataset site URL;
-- **distributionTypes** - An array of distribution model types. Please see the available types [here](#distributiontype)
-- **documentationUrl** - The documentation's URL;
-- **email** - The email of the publisher of this dataset;
-- **legalEntity** - The legal name of the publisher of this dataset;
-- **name** - The name of the publisher of this dataset;
-- **openDataBaseUrl** - The base OpenData URL for this dataset. This URL is used as a base URL for the feeds;
-- **organisationLogoUrl** - A valid image URL of the organisation's logo;
-- **organisationName** - The organisation's name;
-- **organisationUrl** - The organisation's URL;
-- **plainTextDescription** - The publisher's description in plain text;
-- **platformName** - The platform's name;
-- **platformUrl** - The platform's URL;
-- **softwareVersion** - The platform's software version.
+
+| Key                        | Type     | Description |
+| -------------------------- | -------- | ----------- |
+| `backgroundImageUrl`       | `string` | The background image to show on the page |
+| `bookingBaseUrl`           | `string` | TBC. TODO: Where does `bookingBaseUrl` go? |
+| `datasetSiteDiscussionUrl` | `string` | The discussion URL for the dataset |
+| `datasetSiteUrl`           | `string` | The dataset site URL |
+| `distributionTypes`        | `array`  | An array of distribution model types. See [available types](#distributiontype) |
+| `documentationUrl`         | `string` | The documentation's URL |
+| `email`                    | `string` | The email of the publisher of this dataset |
+| `legalEntity`              | `string` | The legal name of the publisher of this dataset |
+| `name`                     | `string` | The name of the publisher of this dataset |
+| `openDataBaseUrl`          | `string` | The base OpenData URL for this dataset, used as a base URL for the feeds |
+| `organisationLogoUrl`      | `string` | A valid image URL of the organisation's logo |
+| `organisationName`         | `string` | The organisation's name |
+| `organisationUrl`          | `string` | The organisation's URL |
+| `plainTextDescription`     | `string` | The publisher's description in plain text |
+| `platformName`             | `string` | The platform's name |
+| `platformUrl`              | `string` | The platform's URL |
+| `softwareVersion`          | `string` | The platform's software version. |
 
 #### `renderDatasetSite($dataset, $additionalData)`
 
@@ -116,11 +119,14 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 `$dataset` must be a valid `\OpenActive\Models\SchemaOrg\Dataset` model.
 
 `$additionalData` must be an associative array with the following keys:
-- **backgroundImageUrl** - The background image to show on the page;
-- **documentationUrl** - The documentation's URL;
-- **platformName** - The platform's name;
-- **platformUrl** - The platform's URL;
-- **softwareVersion** - The platform's software version.
+
+| Key                  | Type     | Description |
+| -------------------- | -------- | ----------- |
+| `backgroundImageUrl` | `string` | The background image to show on the page; |
+| `documentationUrl`   | `string` | The documentation's URL; |
+| `platformName`       | `string` | The platform's name; |
+| `platformUrl`        | `string` | The platform's URL; |
+| `softwareVersion`    | `string` | The platform's software version. |
 
 #### `DistributionType`
 
