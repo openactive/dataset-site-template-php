@@ -42,51 +42,27 @@ class TemplateRenderer
      */
     public function renderSimpleDatasetSite($data)
     {
+        // Get available distributionTypes
+        $distributionTypeConstants = (
+            new \ReflectionClass(new DistributionType())
+        )->getConstants();
+
         // Create distribution list based on flags
         $distribution = array();
         if(
-            array_key_exists("includeCourseInstanceFeed", $data) &&
-            $data["includeCourseInstanceFeed"]
+            array_key_exists("distributionTypes", $data) &&
+            is_array($data["distributionTypes"])
         ) {
-            $distribution[] = new DataDownload([
-                "name" => "FacilityUse",
-                "additionalType" => "https://openactive.io/FacilityUse",
-                "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
-                "contentUrl" => $data["openDataBaseUrl"] . "feeds/facility-uses"
-            ]);
-        }
-        if(
-            array_key_exists("includeEventFeed", $data) &&
-            $data["includeEventFeed"]
-        ) {
-            $distribution[] = new DataDownload([
-                "name" => "Slot",
-                "additionalType" => "https://openactive.io/Slot",
-                "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
-                "contentUrl" => $data["openDataBaseUrl"] . "feeds/slots"
-            ]);
-        }
-        if(
-            array_key_exists("includeScheduledSessionFeed", $data) &&
-            $data["includeScheduledSessionFeed"]
-        ) {
-            $distribution[] = new DataDownload([
-                "name" => "ScheduledSession",
-                "additionalType" => "https://openactive.io/ScheduledSession",
-                "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
-                "contentUrl" => $data["openDataBaseUrl"] . "feeds/scheduled-sessions"
-            ]);
-        }
-        if(
-            array_key_exists("includeSessionSeriesFeed", $data) &&
-            $data["includeSessionSeriesFeed"]
-        ) {
-            $distribution[] = new DataDownload([
-                "name" => "SessionSeries",
-                "additionalType" => "https://openactive.io/SessionSeries",
-                "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
-                "contentUrl" => $data["openDataBaseUrl"] . "feeds/session-series"
-            ]);
+            foreach ($data["distributionTypes"] as $distributionType) {
+                if(array_search($distributionType, $distributionTypeConstants) !== false) {
+                    $distribution[] = new DataDownload([
+                        "name" => $distributionType,
+                        "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
+                        "contentUrl" => $data["openDataBaseUrl"] . "feeds/".
+                            Str::kebab($distributionType),
+                    ]);
+                }
+            }
         }
 
         // TODO: Where does bookingBaseUrl go?

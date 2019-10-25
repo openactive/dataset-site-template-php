@@ -91,13 +91,10 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 - **backgroundImageUrl** - The background image to show on the page;
 - **bookingBaseUrl** - TBC. TODO: Where does `bookingBaseUrl` go?
 - **datasetSiteDiscussionUrl** - The discussion URL for the dataset
-- **datasetSiteUrl** - The dataset site URL
+- **datasetSiteUrl** - The dataset site URL;
+- **distributionTypes** - An array of distribution model types. Please see the available types [here](#distribution-type)
 - **documentationUrl** - The documentation's URL;
 - **email** - The email of the publisher of this dataset;
-- **includeCourseInstanceFeed** - Whether or not to include the `CourseInstance` feed link;
-- **includeEventFeed** - Whether or not to include the `Event` feed link;
-- **includeScheduledSessionFeed** - Whether or not to include the `ScheduledSession` feed link;
-- **includeSessionSeriesFeed** - Whether or not to include the `SessionSeries` feed link;
 - **legalEntity** - The legal name of the publisher of this dataset;
 - **name** - The name of the publisher of this dataset;
 - **openDataBaseUrl** - The base OpenData URL for this dataset. This URL is used as a base URL for the feeds;
@@ -121,6 +118,33 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 - **platformName** - The platform's name;
 - **platformUrl** - The platform's URL;
 - **softwareVersion** - The platform's software version.
+
+#### `DistributionType`
+
+A class containing the supported distribution types:
+| Constant                  | Value                   |
+| ------------------------- | ----------------------- |
+| `COURSE`                  | `Course`                |
+| `COURSE_INSTANCE`         | `CourseInstance`        |
+| `EVENT`                   | `Event`                 |
+| `FACILITY_USE`            | `FacilityUse`           |
+| `HEADLINE_EVENT`          | `HeadlineEvent`         |
+| `INDIVIDUAL_FACILITY_USE` | `IndividualFacilityUse` |
+| `SCHEDULED_SESSION`       | `ScheduledSession`      |
+| `SESSION_SERIES`          | `SessionSeries`         |
+| `SLOT`                    | `Slot`                  |
+
+You can use any of the above like this:
+```php
+use OpenActive\DatasetSiteTemplate\DistributionType;
+
+echo DistributionType::COURSE_INSTANCE;
+```
+
+Which will output:
+```
+CourseInstance
+```
 
 ## Development
 

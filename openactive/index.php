@@ -2,6 +2,7 @@
 
 require __DIR__ . "/../vendor/autoload.php";
 
+use OpenActive\DatasetSiteTemplate\DistributionType;
 use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 
 // Get JSON-LD data
@@ -13,12 +14,14 @@ $data = array(
     "bookingBaseUrl" => "https://ourparks.org.uk/openbooking/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
+    "distributionTypes" => array(
+        DistributionType::FACILITY_USE,
+        DistributionType::SCHEDULED_SESSION,
+        DistributionType::SESSION_SERIES,
+        DistributionType::SLOT,
+    ),
     "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "email" => "hello@ourparks.org.uk",
-    "includeCourseInstanceFeed" => false,
-    "includeEventFeed" => false,
-    "includeScheduledSessionFeed" => true,
-    "includeSessionSeriesFeed" => true,
     "legalEntity" => "Our Parks",
     "name" => "Our Parks Sessions",
     "openDataBaseUrl" => "https://ourparks.org.uk/opendata/",
