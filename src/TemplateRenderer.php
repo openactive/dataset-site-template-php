@@ -132,6 +132,7 @@ class TemplateRenderer
             "documentationUrl" => $data["documentationUrl"],
             "platformName" => $data["platformName"],
             "platformUrl" => $data["platformUrl"],
+            "softwareVersion" => $data["softwareVersion"],
         );
 
         // Render compiled template with JSON-LD data
@@ -164,7 +165,7 @@ class TemplateRenderer
             "documentation" => $additionalData["documentationUrl"],
             "platformName" => $additionalData["platformName"],
             "platformUrl" => $additionalData["platformUrl"],
-            "softwareVersion" => Meta::VERSION,
+            "softwareVersion" => $additionalData["softwareVersion"],
         );
         $attributeNames = array(
             "description",
