@@ -11,7 +11,7 @@ For comparison, see the [.NET](https://github.com/openactive/dataset-site-templa
     - [API](#api)
         - [`renderSimpleDatasetSite($data)`](#rendersimpledatasetsitedata)
         - [`renderDatasetSite($data, $additionalData)`](#renderdatasetsitedataset-additionaldata)
-        - [`DistributionType`](#distribution-type)
+        - [`DistributionType`](#distributiontype)
 - [Development](#development)
     - [Installation](#installation)
     - [Example](#example)
@@ -95,7 +95,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 - **bookingBaseUrl** - TBC. TODO: Where does `bookingBaseUrl` go?
 - **datasetSiteDiscussionUrl** - The discussion URL for the dataset
 - **datasetSiteUrl** - The dataset site URL;
-- **distributionTypes** - An array of distribution model types. Please see the available types [here](#distribution-type)
+- **distributionTypes** - An array of distribution model types. Please see the available types [here](#distributiontype)
 - **documentationUrl** - The documentation's URL;
 - **email** - The email of the publisher of this dataset;
 - **legalEntity** - The legal name of the publisher of this dataset;
