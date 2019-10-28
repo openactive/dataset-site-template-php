@@ -2,7 +2,7 @@
 
 namespace OpenActive\DatasetSiteTemplate\Tests;
 
-use OpenActive\DatasetSiteTemplate\DistributionType;
+use OpenActive\DatasetSiteTemplate\FeedType;
 use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 use PHPUnit\Framework\TestCase;
 
@@ -50,10 +50,10 @@ class TemplateRendererTest extends TestCase
             "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
             "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
             "distributionTypes" => array(
-                DistributionType::FACILITY_USE,
-                DistributionType::SCHEDULED_SESSION,
-                DistributionType::SESSION_SERIES,
-                DistributionType::SLOT,
+                FeedType::FACILITY_USE,
+                FeedType::SCHEDULED_SESSION,
+                FeedType::SESSION_SERIES,
+                FeedType::SLOT,
             ),
             "documentationUrl" => "https://ourparks.org.uk/openbooking/",
             "email" => "hello@ourparks.org.uk",

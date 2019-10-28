@@ -45,7 +45,7 @@ class TemplateRenderer
     {
         // Get available distributionTypes
         $distributionTypeConstants = (
-            new \ReflectionClass(new DistributionType())
+            new \ReflectionClass(new FeedType())
         )->getConstants();
 
         // Create distribution list based on flags

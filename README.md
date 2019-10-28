@@ -11,7 +11,7 @@ For comparison, see the [.NET](https://github.com/openactive/dataset-site-templa
     - [API](#api)
         - [`renderSimpleDatasetSite($data)`](#rendersimpledatasetsitedata)
         - [`renderDatasetSite($data, $additionalData)`](#renderdatasetsitedataset-additionaldata)
-        - [`DistributionType`](#distributiontype)
+        - [`FeedType`](#feedtype)
 - [Development](#development)
     - [Installation](#installation)
     - [Example](#example)
@@ -67,10 +67,10 @@ $data = array(
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
     "distributionTypes" => array(
-        DistributionType::FACILITY_USE,
-        DistributionType::SCHEDULED_SESSION,
-        DistributionType::SESSION_SERIES,
-        DistributionType::SLOT,
+        FeedType::FACILITY_USE,
+        FeedType::SCHEDULED_SESSION,
+        FeedType::SESSION_SERIES,
+        FeedType::SLOT,
     ),
     "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "email" => "hello@ourparks.org.uk",
@@ -100,7 +100,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | `bookingServiceUrl`             | `string` | The platform's URL |
 | `datasetSiteDiscussionUrl`      | `string` | The discussion URL for the dataset |
 | `datasetSiteUrl`                | `string` | The dataset site URL |
-| `distributionTypes`             | `array`  | An array of distribution model types. See [available types](#distributiontype) |
+| `distributionTypes`             | `array`  | An array of distribution model types. See [available types](#feedtype) |
 | `documentationUrl`              | `string` | The documentation's URL |
 | `email`                         | `string` | The email of the publisher of this dataset |
 | `legalEntity`                   | `string` | The legal name of the publisher of this dataset |
@@ -111,7 +111,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | `organisationUrl`               | `string` | The organisation's URL |
 | `plainTextDescription`          | `string` | The publisher's description in plain text |
 
-#### `DistributionType`
+#### `FeedType`
 
 A class containing the supported distribution types:
 
@@ -129,9 +129,9 @@ A class containing the supported distribution types:
 
 You can use any of the above like this:
 ```php
-use OpenActive\DatasetSiteTemplate\DistributionType;
+use OpenActive\DatasetSiteTemplate\FeedType;
 
-echo DistributionType::COURSE_INSTANCE;
+echo FeedType::COURSE_INSTANCE;
 ```
 
 Which will output:

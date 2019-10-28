@@ -2,7 +2,7 @@
 
 namespace OpenActive\DatasetSiteTemplate;
 
-class DistributionType
+class FeedType
 {
     const COURSE = "Course";
     const COURSE_INSTANCE = "CourseInstance";
