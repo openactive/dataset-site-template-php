@@ -175,4 +175,25 @@ class TemplateRenderer
         // Render compiled template with JSON-LD data
         return $this->mustacheEngine->render($template, $data);
     }
+
+    /**
+     * Converts a list of nouns into a human readable list.
+     * ["One", "Two", "Three", "Four"] => "One, Two, Three and Four"
+     *
+     * @param string[] $list List of nouns
+     * @return string containing human readable list
+     */
+    private function toHumanisedList($list)
+    {
+        // Length of list
+        $listLength = count($list);
+
+        return implode(", ", array_map(
+            function($idx, $item) use ($listLength) {
+                return $idx === $listLength - 1 ? " and ".$item : $item;
+            },
+            array_keys($list),
+            array_values($list)
+        ));
+    }
 }
