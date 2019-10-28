@@ -53,10 +53,10 @@ class TemplateRenderer
         $allFeedConfigurations = FeedConfiguration::allFeedConfigurations();
         // Selected feed types are the intersection of keys
         // of the provided feed types and all the feed configurations
-        $selectedFeedConfigurations = array_intersect_key(
+        $selectedFeedConfigurations = array_values(array_intersect_key(
             $allFeedConfigurations,
             array_flip($supportedFeedTypes)
-        );
+        ));
         // Create DataDownload list
         $dataDownloads = array_map(
             function($feedConfiguration) use ($settings) {
@@ -75,7 +75,7 @@ class TemplateRenderer
             function($feedConfiguration) {
                 return $feedConfiguration->getDisplayName();
             },
-            array_values($selectedFeedConfigurations)
+            $selectedFeedConfigurations
         );
         // Remove empty elements
         $dataFeedDescriptions = array_filter($dataFeedDescriptions);
