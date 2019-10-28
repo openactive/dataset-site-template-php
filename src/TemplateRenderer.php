@@ -70,15 +70,19 @@ class TemplateRenderer
             $selectedFeedConfigurations
         );
 
-        $dataFeedDescriptions = array_values(array_unique(array_map(
+        // Build data feed descriptions from displayName of $selectedFeedConfigurations
+        $dataFeedDescriptions = array_map(
             function($feedConfiguration) {
                 return $feedConfiguration->getDisplayName();
             },
             array_values($selectedFeedConfigurations)
-        )));
-
-        var_dump($dataFeedDescriptions);
-        die();
+        );
+        // Remove empty elements
+        $dataFeedDescriptions = array_filter($dataFeedDescriptions);
+        // Remove duplicate elements
+        $dataFeedDescriptions = array_unique($dataFeedDescriptions);
+        // Re-index array 0 - length
+        $dataFeedDescriptions = array_values($dataFeedDescriptions);
 
         return $this->renderSimpleDatasetSiteFromDataDownloads(
             $settings,
@@ -217,7 +221,7 @@ class TemplateRenderer
 
     /**
      * Converts a list of nouns into a human readable list.
-     * ["One", "Two", "Three", "Four"] => "One, Two, Three and Four"
+     * ["One", "Two", "Three", "Four"] => "One, Two, Three, and Four"
      *
      * @param string[] $list List of nouns
      * @return string containing human readable list
@@ -227,12 +231,9 @@ class TemplateRenderer
         // Length of list
         $listLength = count($list);
 
-        return implode(", ", array_map(
-            function($idx, $item) use ($listLength) {
-                return $idx === $listLength - 1 ? " and ".$item : $item;
-            },
-            array_keys($list),
-            array_values($list)
-        ));
+        // Prepend last item with " and "
+        $list[$listLength - 1] = " and ".$item;
+
+        return implode(", ", $list);
     }
 }
