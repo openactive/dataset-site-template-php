@@ -232,7 +232,7 @@ class TemplateRenderer
         $listLength = count($list);
 
         // Prepend last item with " and "
-        $list[$listLength - 1] = " and ".$item;
+        $list[$listLength - 1] = " and ".$list[$listLength - 1];
 
         return implode(", ", $list);
     }
