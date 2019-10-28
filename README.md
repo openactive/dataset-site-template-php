@@ -61,8 +61,6 @@ Where `$data` could be defined like the following (as an example):
 ```php
 $data = array(
     "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
-    // TODO: Where does bookingBaseUrl go?
-    "bookingBaseUrl" => "https://ourparks.org.uk/openbooking/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
     "documentationUrl" => "https://ourparks.org.uk/openbooking/",
@@ -95,7 +93,6 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | Key                        | Type     | Description |
 | -------------------------- | -------- | ----------- |
 | `backgroundImageUrl`       | `string` | The background image to show on the page |
-| `bookingBaseUrl`           | `string` | TBC. TODO: Where does `bookingBaseUrl` go? |
 | `datasetSiteDiscussionUrl` | `string` | The discussion URL for the dataset |
 | `datasetSiteUrl`           | `string` | The dataset site URL |
 | `distributionTypes`        | `array`  | An array of distribution model types. See [available types](#distributiontype) |

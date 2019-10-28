@@ -10,8 +10,6 @@ use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 // Create new dataset
 $data = array(
     "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
-    // TODO: Where does bookingBaseUrl go?
-    "bookingBaseUrl" => "https://ourparks.org.uk/openbooking/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
     "distributionTypes" => array(

@@ -65,8 +65,6 @@ class TemplateRenderer
             }
         }
 
-        // TODO: Where does bookingBaseUrl go?
-
         // Create dataset from data
         $dataset = new Dataset([
             "id" => $data["datasetSiteUrl"],
