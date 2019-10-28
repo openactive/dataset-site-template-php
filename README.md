@@ -1,7 +1,7 @@
 # dataset-site-template-php
 PHP Classes and resources supporting dataset site creation
 
-Tools intended to simplify creation of dataset sites using templates.
+This package intends to simplify creation of dataset sites using templates.
 
 For comparison, see the [.NET](https://github.com/openactive/dataset-site-template-example-dotnet) and [Ruby](https://github.com/openactive/dataset-site-template-ruby) implementations.
 
@@ -60,21 +60,22 @@ echo (new TemplateRenderer())->renderSimpleDatasetSite($settings, $supportedFeed
 Where `$settings` could be defined like the following (as an example):
 ```php
 $settings = array(
-    "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
-    "bookingServiceName" => "AcmeBooker",
-    "bookingServiceSoftwareVersion" => "0.1.0",
-    "bookingServiceUrl" => "https://acmebooker.example.com/",
-    "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
+    "openDataFeedBaseUrl" => "https://ourparks.org.uk/opendata/",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
-    "documentationUrl" => "https://ourparks.org.uk/openbooking/",
-    "email" => "hello@ourparks.org.uk",
-    "legalEntity" => "Our Parks",
-    "name" => "Our Parks Sessions",
-    "openDataBaseUrl" => "https://ourparks.org.uk/opendata/",
-    "organisationLogoUrl" => "https://ourparks.org.uk/logo.png",
+    "datasetDiscussionUrl" => "https://github.com/ourparks/opendata",
+    "datasetDocumentationUrl" => "https://ourparks.org.uk/openbooking/",
+    "datasetLanguages" => array("en-GB"),
     "organisationName" => "Our Parks",
     "organisationUrl" => "https://ourparks.org.uk/",
-    "plainTextDescription" => "Our Parks - turn up tone up!",
+    "organisationLegalEntity" => "Our Parks",
+    "organisationPlainTextDescription" => "Our Parks - turn up tone up!",
+    "organisationLogoUrl" => "https://ourparks.org.uk/logo.png",
+    "organisationEmail" => "hello@ourparks.org.uk",
+    "platformName" => "AcmeBooker",
+    "platformUrl" => "https://acmebooker.example.com/",
+    "platformSoftwareVersion" => "0.1.0",
+    "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+    "dateFirstPublished" => "2019-10-28",
 );
 ```
 
@@ -100,48 +101,34 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 
 ##### Settings
 
-| Key                             | Type     | Description |
-| ------------------------------- | -------- | ----------- |
-| `backgroundImageUrl`            | `string` | The background image to show on the page |
-| `bookingServiceName`            | `string` | The platform's name |
-| `bookingServiceSoftwareVersion` | `string` | The platform's software version. |
-| `bookingServiceUrl`             | `string` | The platform's URL |
-| `datasetSiteDiscussionUrl`      | `string` | The discussion URL for the dataset |
-| `datasetSiteUrl`                | `string` | The dataset site URL |
-| `documentationUrl`              | `string` | The documentation's URL |
-| `email`                         | `string` | The email of the publisher of this dataset |
-| `legalEntity`                   | `string` | The legal name of the publisher of this dataset |
-| `name`                          | `string` | The name of the publisher of this dataset |
-| `openDataBaseUrl`               | `string` | The base OpenData URL for this dataset, used as a base URL for the feeds |
-| `organisationLogoUrl`           | `string` | A valid image URL of the organisation's logo |
-| `organisationName`              | `string` | The organisation's name |
-| `organisationUrl`               | `string` | The organisation's URL |
-| `plainTextDescription`          | `string` | The publisher's description in plain text |
+| Key                                | Type     | Description |
+| ---------------------------------- | -------- | ----------- |
+| `openDataFeedBaseUrl`              | `string` | The the base URL for the open data feeds |
+| `datasetSiteUrl`                   | `string` | The URL where this dataset site is displayed (the page's own URL) |
+| `datasetDiscussionUrl`             | `string` | The GitHub issues page for the dataset |
+| `datasetDocumentationUrl`          | `string` | Any documentation specific to the dataset. This can be set to https://developer.openactive.io if no documentation is available. |
+| `datasetLanguages`        | `array of string` | The languages available in the dataset, following the IETF BCP 47 standard. Defaults to 'en-GB'. |
+| `organisationName`                 | `string` | The publishing organisation's name |
+| `organisationUrl`                  | `string` | The publishing organisation's URL |
+| `organisationLegalEntity`          | `string` | The legal name of the publishing organisation of this dataset |
+| `organisationPlainTextDescription` | `string` | A plain text description of this organisation |
+| `organisationLogoUrl`              | `string` | An image URL of the publishing organisation's logo, ideally in PNG format |
+| `organisationEmail`                | `string` | The contact email of the publishing organisation of this dataset |
+| `platformName`                     | `string` | The software platform's name, if different from the publishing organisation. |
+| `platformUrl`                      | `string` | The software platform's website |
+| `platformSoftwareVersion`          | `string` | The software platform's software version |
+| `backgroundImageUrl`               | `string` | The background image to show on the Dataset Site page |
+| `dateFirstPublished`               | `string` | The date the dataset was first published |
 
-And `$supportedFeedTypes` must be an `array` of `FeedType` constants. See [available types](#feedtype)
+And `$supportedFeedTypes` must be an `array` of `FeedType` constants, which auto-generates the metadata associated which each feed using best-practice values. See [available types](#feedtype)
 
 #### `renderSimpleDatasetSiteFromDataDownloads($settings, $dataDownloads, $dataFeedDescriptions)`
 
 Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, the provided [`$settings`](#settings), `$dataDownloads` and `$dataFeedDescriptions`.
 
-The `$dataDownloads` argument must be an `array` of `\OpenActive\Models\OA\DataDownload` objects.
+The `$dataDownloads` argument must be an `array` of `\OpenActive\Models\OA\DataDownload` objects, which each describe an available open data feed.
 
-The `$dataFeedDescriptions` must be an array of strings.
-
-This gets calculated internally by the `renderSimpleDatasetSite` method as the `displayName` attributes of the `FeedConfiguration`s matching the `$supportedFeedTypes` (removing false-y values and duplicates).
-
-For example, assuming `$supportedFeedTypes` is defined as:
-```php
-$supportedFeedTypes = array(
-    FeedType::FACILITY_USE,
-    FeedType::SCHEDULED_SESSION,
-    FeedType::SESSION_SERIES,
-    FeedType::SLOT,
-);
-```
-
-The resulting `$dataFeedDescriptions` will be:
-
+The `$dataFeedDescriptions` must be an array of strings that describe the dataset, e.g:
 ```php
 $dataFeedDescriptions = array(
     "Sessions",
@@ -153,7 +140,7 @@ $dataFeedDescriptions = array(
 
 Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$dataset`.
 
-The `$dataset` argument must be an object of type `\OpenActive\Models\OA\Dataset`.
+The `$dataset` argument must be an object of type `\OpenActive\Models\OA\Dataset`, and must contain the properties required to render the dataset site.
 
 #### `FeedType`
 
@@ -184,7 +171,7 @@ Which will output:
 CourseInstance
 ```
 
-## Development
+## Contribution
 
 ### Installation
 ```bash
