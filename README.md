@@ -10,8 +10,8 @@ For comparison, see the [.NET](https://github.com/openactive/dataset-site-templa
 - [Usage](#usage)
     - [API](#api)
         - [`renderSimpleDatasetSite($settings, $supportedFeedTypes)`](#rendersimpledatasetsitesettings-supportedfeedtypes)
-        - [`renderDatasetSite($dataset)`](#renderdatasetsitedataset)
         - [`renderSimpleDatasetSiteFromDataDownloads($settings, $dataDownloads, $dataFeedDescriptions)`](#rendersimpledatasetsitefromdatadownloadssettings-datadownloads-datafeeddescriptions)
+        - [`renderDatasetSite($dataset)`](#renderdatasetsitedataset)
         - [`FeedType`](#feedtype)
 - [Development](#development)
     - [Installation](#installation)
@@ -27,7 +27,6 @@ While most of the functionality should work down to PHP 5.4, some functionality 
 This project also makes use of [Mustache](https://github.com/bobthecow/mustache.php) for rendering the template (installed via Composer).
 
 **Temporary:** You will also need a local copy of the [`models-php`](https://github.com/openactive/models-php) repo.
-
 This repository and the `models-php` will need to co-exist in the same parent directory, for example:
 ```
 projects
@@ -119,7 +118,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | `organisationUrl`               | `string` | The organisation's URL |
 | `plainTextDescription`          | `string` | The publisher's description in plain text |
 
-And `$supportedFeedTypes` must be an `array` of `FeedType`s. See [available types](#feedtype)
+And `$supportedFeedTypes` must be an `array` of `FeedType` constants. See [available types](#feedtype)
 
 #### `renderSimpleDatasetSiteFromDataDownloads($settings, $dataDownloads, $dataFeedDescriptions)`
 
@@ -127,7 +126,9 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 
 The `$dataDownloads` argument must be an `array` of `\OpenActive\Models\OA\DataDownload` objects.
 
-The `$dataFeedDescriptions` must be an array of strings. As an example, this gets calculated internally by the `renderSimpleDatasetSite` method as the `displayName`s attributes of the `FeedConfiguration`s matching the `$supportedFeedTypes`.
+The `$dataFeedDescriptions` must be an array of strings.
+
+This gets calculated internally by the `renderSimpleDatasetSite` method as the `displayName` attributes of the `FeedConfiguration`s matching the `$supportedFeedTypes` (removing false-y values and duplicates).
 
 For example, assuming `$supportedFeedTypes` is defined as:
 ```php
