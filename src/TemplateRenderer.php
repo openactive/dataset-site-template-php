@@ -38,10 +38,10 @@ class TemplateRenderer
     /**
      * Render the template from a given array of data.
      *
-     * @param array $data
+     * @param array $settings
      * @return string Rendered template
      */
-    public function renderSimpleDatasetSite($data)
+    public function renderSimpleDatasetSite($settings)
     {
         // Get available distributionTypes
         $distributionTypeConstants = (
@@ -51,15 +51,15 @@ class TemplateRenderer
         // Create distribution list based on flags
         $distribution = array();
         if(
-            array_key_exists("distributionTypes", $data) &&
-            is_array($data["distributionTypes"])
+            array_key_exists("distributionTypes", $settings) &&
+            is_array($settings["distributionTypes"])
         ) {
-            foreach ($data["distributionTypes"] as $distributionType) {
+            foreach ($settings["distributionTypes"] as $distributionType) {
                 if(array_search($distributionType, $distributionTypeConstants) !== false) {
                     $distribution[] = new DataDownload([
                         "name" => $distributionType,
                         "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
-                        "contentUrl" => $data["openDataBaseUrl"] . "feeds/".
+                        "contentUrl" => $settings["openDataBaseUrl"] . "feeds/".
                             Str::kebab($distributionType),
                     ]);
                 }
@@ -68,12 +68,12 @@ class TemplateRenderer
 
         // Create dataset from data
         $dataset = new Dataset([
-            "id" => $data["datasetSiteUrl"],
-            "url" => $data["datasetSiteUrl"],
-            "name" => $data["name"],
+            "id" => $settings["datasetSiteUrl"],
+            "url" => $settings["datasetSiteUrl"],
+            "name" => $settings["name"],
             "description" => "Near real-time availability and rich ".
                 "descriptions relating to the sessions and facilities ".
-                "available from ".$data["organisationName"].", published ".
+                "available from ".$settings["organisationName"].", published ".
                 "using the OpenActive Modelling Specification 2.0.",
             "keywords" => [
                 "Sessions",
@@ -84,27 +84,27 @@ class TemplateRenderer
                 "OpenActive"
             ],
             "license" => "https://creativecommons.org/licenses/by/4.0/",
-            "discussionUrl" => $data["datasetSiteDiscussionUrl"],
-            "documentation" => $data["documentationUrl"],
+            "discussionUrl" => $settings["datasetSiteDiscussionUrl"],
+            "documentation" => $settings["documentationUrl"],
             "inLanguage" => "en-GB",
             "schemaVersion" => "https://www.openactive.io/modelling-opportunity-data/2.0/",
             "publisher" => new Organization([
-                "name" => $data["organisationName"],
-                "legalName" => $data["legalEntity"],
-                "description" => $data["plainTextDescription"],
-                "email" => $data["email"],
-                "url" => $data["organisationUrl"],
+                "name" => $settings["organisationName"],
+                "legalName" => $settings["legalEntity"],
+                "description" => $settings["plainTextDescription"],
+                "email" => $settings["email"],
+                "url" => $settings["organisationUrl"],
                 "logo" => new ImageObject([
-                    "url" => $data["organisationLogoUrl"]
+                    "url" => $settings["organisationLogoUrl"]
                 ])
             ]),
             "bookingService" => new BookingService([
-                "name" => $data["bookingServiceName"],
-                "url" => $data["bookingServiceUrl"],
-                "softwareVersion" => $data["bookingServiceSoftwareVersion"],
+                "name" => $settings["bookingServiceName"],
+                "url" => $settings["bookingServiceUrl"],
+                "softwareVersion" => $settings["bookingServiceSoftwareVersion"],
             ]),
             "backgroundImage" => new ImageObject([
-                "url" => $data["backgroundImageUrl"],
+                "url" => $settings["backgroundImageUrl"],
             ]),
             "distribution" => $distribution,
             "datePublished" => new \DateTime("now", new \DateTimeZone("UTC")),
@@ -117,17 +117,16 @@ class TemplateRenderer
     /**
      * Render the template from a given OpenActive dataset model.
      *
-     * @param \OpenActive\Models\Dataset $model The OpenActive model.
-     * @param array $additionalData Additional data not belonging to the Dataset model.
+     * @param \OpenActive\Models\Dataset $dataset The OpenActive model.
      * @return string Rendered template
      */
-    public function renderDatasetSite($model)
+    public function renderDatasetSite($dataset)
     {
-        if($model instanceof OpenActive\Models\SchemaOrg\Dataset) {
+        if($dataset instanceof \OpenActive\Models\OA\Dataset) {
             throw new InvalidArgumentException(
                 "Invalid argument type. Argument must be an instance of type ".
-                "\OpenActive\Models\SchemaOrg\Dataset, ".
-                get_class($model)." given."
+                "\OpenActive\Models\OA\Dataset, ".
+                get_class($dataset)." given."
             );
         }
 
@@ -153,7 +152,7 @@ class TemplateRenderer
         foreach ($attributeNames as $attributeName) {
             $getterName = "get" . Str::pascal($attributeName);
 
-            $value = $model->$getterName();
+            $value = $dataset->$getterName();
 
             // If an object, we prepare it for serialization
             if(is_object($value)) {
@@ -171,7 +170,7 @@ class TemplateRenderer
         }
 
         // JSON-LD is the serialized content
-        $data["json"] = Dataset::serialize($model, true);
+        $data["json"] = Dataset::serialize($dataset, true);
 
         // Render compiled template with JSON-LD data
         return $this->mustacheEngine->render($template, $data);

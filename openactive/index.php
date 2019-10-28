@@ -8,7 +8,7 @@ use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 // Get JSON-LD data
 
 // Create new dataset
-$data = array(
+$settings = array(
     "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
     "bookingServiceName" => "AcmeBooker",
     "bookingServiceSoftwareVersion" => "0.1.0",
@@ -33,4 +33,4 @@ $data = array(
 );
 
 // Render compiled template with data
-echo (new TemplateRenderer())->renderSimpleDatasetSite($data);
+echo (new TemplateRenderer())->renderSimpleDatasetSite($settings);
