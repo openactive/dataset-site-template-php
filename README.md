@@ -106,15 +106,15 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | `openDataFeedBaseUrl`              | `string` | The the base URL for the open data feeds |
 | `datasetSiteUrl`                   | `string` | The URL where this dataset site is displayed (the page's own URL) |
 | `datasetDiscussionUrl`             | `string` | The GitHub issues page for the dataset |
-| `datasetDocumentationUrl`          | `string` | Any documentation specific to the dataset. This can be set to https://developer.openactive.io if no documentation is available. |
-| `datasetLanguages`        | `array of string` | The languages available in the dataset, following the IETF BCP 47 standard. Defaults to 'en-GB'. |
+| `datasetDocumentationUrl`          | `string` | Any documentation specific to the dataset. Defaults to https://developer.openactive.io/ if not provided, which should be used if no documentation is available. |
+| `datasetLanguages`        | `array of string` | The languages available in the dataset, following the IETF BCP 47 standard. Defaults to `array("en-GB")`. |
 | `organisationName`                 | `string` | The publishing organisation's name |
 | `organisationUrl`                  | `string` | The publishing organisation's URL |
 | `organisationLegalEntity`          | `string` | The legal name of the publishing organisation of this dataset |
 | `organisationPlainTextDescription` | `string` | A plain text description of this organisation |
 | `organisationLogoUrl`              | `string` | An image URL of the publishing organisation's logo, ideally in PNG format |
 | `organisationEmail`                | `string` | The contact email of the publishing organisation of this dataset |
-| `platformName`                     | `string` | The software platform's name, if different from the publishing organisation. |
+| `platformName`                     | `string` | The software platform's name. Only set this if different from the publishing organisation, otherwise leave as null to exclude platform metadata. |
 | `platformUrl`                      | `string` | The software platform's website |
 | `platformSoftwareVersion`          | `string` | The software platform's software version |
 | `backgroundImageUrl`               | `string` | The background image to show on the Dataset Site page |
