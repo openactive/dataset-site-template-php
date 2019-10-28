@@ -18,7 +18,7 @@ class TemplateRendererTest extends TestCase
      * @dataProvider templateRendererProvider
      * @return void
      */
-    public function testTemplateRendererInstance($renderer, $data)
+    public function testTemplateRendererInstance($renderer, $data, $supportedFeedTypes)
     {
         $this->assertInstanceOf(
             "\\OpenActive\\DatasetSiteTemplate\\TemplateRenderer",
@@ -32,11 +32,11 @@ class TemplateRendererTest extends TestCase
      * @dataProvider templateRendererProvider
      * @return void
      */
-    public function testRenderString($renderer, $data)
+    public function testRenderString($renderer, $data, $supportedFeedTypes)
     {
         $this->assertInternalType(
             "string",
-            $renderer->renderSimpleDatasetSite($data)
+            $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes)
         );
     }
 
@@ -47,14 +47,11 @@ class TemplateRendererTest extends TestCase
     {
         $data = array(
             "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+            "bookingServiceName" => "AcmeBooker",
+            "bookingServiceUrl" => "https://acmebooker.example.com/",
+            "bookingServiceSoftwareVersion" => "0.1.0",
             "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
             "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
-            "distributionTypes" => array(
-                FeedType::FACILITY_USE,
-                FeedType::SCHEDULED_SESSION,
-                FeedType::SESSION_SERIES,
-                FeedType::SLOT,
-            ),
             "documentationUrl" => "https://ourparks.org.uk/openbooking/",
             "email" => "hello@ourparks.org.uk",
             "legalEntity" => "Our Parks",
@@ -64,13 +61,17 @@ class TemplateRendererTest extends TestCase
             "organisationName" => "Our Parks",
             "organisationUrl" => "https://ourparks.org.uk/",
             "plainTextDescription" => "Our Parks - turn up tone up!",
-            "platformName" => "AcmeBooker",
-            "platformUrl" => "https://acmebooker.example.com/",
-            "softwareVersion" => "0.1.0",
+        );
+
+        $supportedFeedTypes = array(
+            FeedType::FACILITY_USE,
+            FeedType::SCHEDULED_SESSION,
+            FeedType::SESSION_SERIES,
+            FeedType::SLOT,
         );
 
         return array(
-            array(new TemplateRenderer(), $data)
+            array(new TemplateRenderer(), $data, $supportedFeedTypes)
         );
     }
 }
