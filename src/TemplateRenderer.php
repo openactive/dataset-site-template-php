@@ -142,46 +142,38 @@ class TemplateRenderer
             "softwareVersion" => $additionalData["softwareVersion"],
         );
         $attributeNames = array(
+            "backgroundImage",
+            "bookingService",
+            "datePublished",
             "description",
             "discussionUrl",
+            "distribution",
+            "documentation",
             "license",
             "name",
+            "publisher",
             "schemaVersion",
             "url",
         );
         foreach ($attributeNames as $attributeName) {
             $getterName = "get" . Str::pascal($attributeName);
 
-            $data[$attributeName] = $model->$getterName();
-        }
+            $value = $model->$getterName();
 
-        // Build datePublished
-        $data["datePublished"] = JsonLd::prepareDataForSerialization($model->getDatePublished());
-
-        // Build distribution attribute for mustache template
-        // from model's distribution
-        $data["distribution"] = array_map(
-            function($distributionItem) {
-                return array(
-                    "contentUrl" => $distributionItem->getContentUrl(),
-                    "encodingFormat" => $distributionItem->getEncodingFormat(),
-                    "name" => $distributionItem->getName(),
+            // If an object, we prepare it for serialization
+            if(is_object($value)) {
+                $value = JsonLd::prepareDataForSerialization($value);
+            } else if (is_array($value)) {
+                $value = array_map(
+                    function($distributionItem) {
+                        return JsonLd::prepareDataForSerialization($distributionItem);
+                    },
+                    $value
                 );
-            },
-            $model->getDistribution()
-        );
+            }
 
-        // Build publisher attribute for mustache template
-        // From model's publisher
-        $modelPublisher = $model->getPublisher();
-        $data["publisher"] = array(
-            "legalName" => $modelPublisher->getLegalName(),
-            "logo" => array(
-                "url" => $modelPublisher->getLogo()->getUrl(),
-            ),
-            "name" => $modelPublisher->getName(),
-            "url" => $modelPublisher->getUrl(),
-        );
+            $data[$attributeName] = $value;
+        }
 
         // JSON-LD is the serialized content
         $data["json"] = Dataset::serialize($model, true);
