@@ -9,8 +9,9 @@ For comparison, see the [.NET](https://github.com/openactive/dataset-site-templa
 - [Requirements](#requirements)
 - [Usage](#usage)
     - [API](#api)
-        - [`renderSimpleDatasetSite($data)`](#rendersimpledatasetsitedata)
-        - [`renderDatasetSite($data, $additionalData)`](#renderdatasetsitedataset-additionaldata)
+        - [`renderSimpleDatasetSite($settings, $supportedFeedTypes)`](#rendersimpledatasetsitesettings-supportedfeedtypes)
+        - [`renderDatasetSite($dataset)`](#renderdatasetsitedataset)
+        - [`renderSimpleDatasetSiteFromDataDownloads($settings, $dataDownloads, $dataFeedDescriptions)`](#rendersimpledatasetsitefromdatadownloadssettings-datadownloads-datafeeddescriptions)
         - [`FeedType`](#feedtype)
 - [Development](#development)
     - [Installation](#installation)
@@ -54,24 +55,18 @@ Wherever you want to render your Dataset page, include the following instruction
 use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 
 // Render compiled template with data
-echo (new TemplateRenderer())->renderSimpleDatasetSite($data);
+echo (new TemplateRenderer())->renderSimpleDatasetSite($settings, $supportedFeedTypes);
 ```
 
-Where `$data` could be defined like the following (as an example):
+Where `$settings` could be defined like the following (as an example):
 ```php
-$data = array(
+$settings = array(
     "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
     "bookingServiceName" => "AcmeBooker",
     "bookingServiceSoftwareVersion" => "0.1.0",
     "bookingServiceUrl" => "https://acmebooker.example.com/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
-    "distributionTypes" => array(
-        FeedType::FACILITY_USE,
-        FeedType::SCHEDULED_SESSION,
-        FeedType::SESSION_SERIES,
-        FeedType::SLOT,
-    ),
     "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "email" => "hello@ourparks.org.uk",
     "legalEntity" => "Our Parks",
@@ -84,13 +79,27 @@ $data = array(
 );
 ```
 
+And `$feedTypes` could be defined as:
+```php
+use OpenActive\DatasetSiteTemplate\FeedType;
+
+$feedTypes = array(
+    FeedType::FACILITY_USE,
+    FeedType::SCHEDULED_SESSION,
+    FeedType::SESSION_SERIES,
+    FeedType::SLOT,
+);
+```
+
 ### API
 
-#### `renderSimpleDatasetSite($data)`
+#### `renderSimpleDatasetSite($settings, $supportedFeedTypes)`
 
-Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$data`.
+Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, the provided `$settings`, and `$supportedFeedTypes`.
 
-`$data` must contain the following keys:
+`$settings` must contain the following keys:
+
+##### Settings
 
 | Key                             | Type     | Description |
 | ------------------------------- | -------- | ----------- |
@@ -100,7 +109,6 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | `bookingServiceUrl`             | `string` | The platform's URL |
 | `datasetSiteDiscussionUrl`      | `string` | The discussion URL for the dataset |
 | `datasetSiteUrl`                | `string` | The dataset site URL |
-| `distributionTypes`             | `array`  | An array of distribution model types. See [available types](#feedtype) |
 | `documentationUrl`              | `string` | The documentation's URL |
 | `email`                         | `string` | The email of the publisher of this dataset |
 | `legalEntity`                   | `string` | The legal name of the publisher of this dataset |
@@ -111,6 +119,41 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | `organisationUrl`               | `string` | The organisation's URL |
 | `plainTextDescription`          | `string` | The publisher's description in plain text |
 
+And `$supportedFeedTypes` must be an `array` of `FeedType`s. See [available types](#feedtype)
+
+#### `renderSimpleDatasetSiteFromDataDownloads($settings, $dataDownloads, $dataFeedDescriptions)`
+
+Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, the provided [`$settings`](#settings), `$dataDownloads` and `$dataFeedDescriptions`.
+
+The `$dataDownloads` argument must be an `array` of `\OpenActive\Models\OA\DataDownload` objects.
+
+The `$dataFeedDescriptions` must be an array of strings. As an example, this gets calculated internally by the `renderSimpleDatasetSite` method as the `displayName`s attributes of the `FeedConfiguration`s matching the `$supportedFeedTypes`.
+
+For example, assuming `$supportedFeedTypes` is defined as:
+```php
+$supportedFeedTypes = array(
+    FeedType::FACILITY_USE,
+    FeedType::SCHEDULED_SESSION,
+    FeedType::SESSION_SERIES,
+    FeedType::SLOT,
+);
+```
+
+The resulting `$dataFeedDescriptions` will be:
+
+```php
+$dataFeedDescriptions = array(
+    "Sessions",
+    "Facilities"
+);
+```
+
+#### `renderDatasetSite($dataset)`
+
+Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$dataset`.
+
+The `$dataset` argument must be an object of type `\OpenActive\Models\OA\Dataset`.
+
 #### `FeedType`
 
 A class containing the supported distribution types:
@@ -120,6 +163,7 @@ A class containing the supported distribution types:
 | `COURSE`                  | `Course`                |
 | `COURSE_INSTANCE`         | `CourseInstance`        |
 | `EVENT`                   | `Event`                 |
+| `EVENT_SERIES`            | `EventSeries`           |
 | `FACILITY_USE`            | `FacilityUse`           |
 | `HEADLINE_EVENT`          | `HeadlineEvent`         |
 | `INDIVIDUAL_FACILITY_USE` | `IndividualFacilityUse` |

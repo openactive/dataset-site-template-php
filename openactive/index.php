@@ -15,12 +15,6 @@ $settings = array(
     "bookingServiceUrl" => "https://acmebooker.example.com/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
-    "distributionTypes" => array(
-        FeedType::FACILITY_USE,
-        FeedType::SCHEDULED_SESSION,
-        FeedType::SESSION_SERIES,
-        FeedType::SLOT,
-    ),
     "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "email" => "hello@ourparks.org.uk",
     "legalEntity" => "Our Parks",
@@ -32,5 +26,12 @@ $settings = array(
     "plainTextDescription" => "Our Parks - turn up tone up!",
 );
 
+$feedTypes = array(
+    FeedType::FACILITY_USE,
+    FeedType::SCHEDULED_SESSION,
+    FeedType::SESSION_SERIES,
+    FeedType::SLOT,
+);
+
 // Render compiled template with data
-echo (new TemplateRenderer())->renderSimpleDatasetSite($settings);
+echo (new TemplateRenderer())->renderSimpleDatasetSite($settings, $feedTypes);

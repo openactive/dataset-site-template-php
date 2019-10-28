@@ -36,35 +36,80 @@ class TemplateRenderer
     }
 
     /**
-     * Render the template from a given array of data.
+     * Render the template from a given array of settings and supported feed types.
      *
      * @param array $settings
+     * @param FeedType[] $supportedFeedTypes
      * @return string Rendered template
      */
-    public function renderSimpleDatasetSite($settings)
+    public function renderSimpleDatasetSite($settings, $supportedFeedTypes)
     {
         // Get available distributionTypes
         $distributionTypeConstants = (
             new \ReflectionClass(new FeedType())
         )->getConstants();
 
-        // Create distribution list based on flags
-        $distribution = array();
-        if(
-            array_key_exists("distributionTypes", $settings) &&
-            is_array($settings["distributionTypes"])
-        ) {
-            foreach ($settings["distributionTypes"] as $distributionType) {
-                if(array_search($distributionType, $distributionTypeConstants) !== false) {
-                    $distribution[] = new DataDownload([
-                        "name" => $distributionType,
-                        "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
-                        "contentUrl" => $settings["openDataBaseUrl"] . "feeds/".
-                            Str::kebab($distributionType),
-                    ]);
-                }
-            }
-        }
+        // Get all feed configurations
+        $allFeedConfigurations = FeedConfiguration::allFeedConfigurations();
+        // Selected feed types are the intersection of keys
+        // of the provided feed types and all the feed configurations
+        $selectedFeedConfigurations = array_intersect_key(
+            $allFeedConfigurations,
+            array_flip($supportedFeedTypes)
+        );
+        // Create DataDownload list
+        $dataDownloads = array_map(
+            function($feedConfiguration) use ($settings) {
+                return new DataDownload([
+                    "name" => $feedConfiguration->getName(),
+                    "additionalType" => $feedConfiguration->getSameAs(),
+                    "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
+                    "contentUrl" => $settings["openDataBaseUrl"] . $feedConfiguration->getDefaultFeedPath()
+                ]);
+            },
+            $selectedFeedConfigurations
+        );
+
+        $dataFeedDescriptions = array_values(array_unique(array_map(
+            function($feedConfiguration) {
+                return $feedConfiguration->getDisplayName();
+            },
+            array_values($selectedFeedConfigurations)
+        )));
+
+        var_dump($dataFeedDescriptions);
+        die();
+
+        return $this->renderSimpleDatasetSiteFromDataDownloads(
+            $settings,
+            $dataDownloads,
+            $dataFeedDescriptions
+        );
+    }
+
+    /**
+     * Render the template from a given array of settings, data downloads,
+     * and data feed descriptions.
+     *
+     * @param array $settings
+     * @param DataDownload[] $dataDownloads
+     * @param string[] $dataFeedDescriptions
+     * @return string Rendered template
+     */
+    public function renderSimpleDatasetSiteFromDataDownloads(
+        $settings,
+        $dataDownloads,
+        $dataFeedDescriptions
+    )
+    {
+        // Pre-process list of feed descriptions
+        $dataFeedHumanisedList = $this->toHumanisedList($dataFeedDescriptions);
+        $keywords = array_merge($dataFeedDescriptions, array(
+            "Activities",
+            "Sports",
+            "Physical Activity",
+            "OpenActive"
+        ));
 
         // Create dataset from data
         $dataset = new Dataset([
@@ -72,17 +117,11 @@ class TemplateRenderer
             "url" => $settings["datasetSiteUrl"],
             "name" => $settings["name"],
             "description" => "Near real-time availability and rich ".
-                "descriptions relating to the sessions and facilities ".
-                "available from ".$settings["organisationName"].", published ".
-                "using the OpenActive Modelling Specification 2.0.",
-            "keywords" => [
-                "Sessions",
-                "Facilities",
-                "Activities",
-                "Sports",
-                "Physical Activity",
-                "OpenActive"
-            ],
+                "descriptions relating to the ".
+                strtolower($dataFeedHumanisedList)." available from ".
+                $settings["organisationName"].", published using the ".
+                "OpenActive Modelling Specification 2.0.",
+            "keywords" => $keywords,
             "license" => "https://creativecommons.org/licenses/by/4.0/",
             "discussionUrl" => $settings["datasetSiteDiscussionUrl"],
             "documentation" => $settings["documentationUrl"],
@@ -106,7 +145,7 @@ class TemplateRenderer
             "backgroundImage" => new ImageObject([
                 "url" => $settings["backgroundImageUrl"],
             ]),
-            "distribution" => $distribution,
+            "distribution" => $dataDownloads,
             "datePublished" => new \DateTime("now", new \DateTimeZone("UTC")),
         ]);
 
@@ -122,7 +161,7 @@ class TemplateRenderer
      */
     public function renderDatasetSite($dataset)
     {
-        if($dataset instanceof \OpenActive\Models\OA\Dataset) {
+        if($dataset instanceof OpenActive\Models\OA\Dataset) {
             throw new InvalidArgumentException(
                 "Invalid argument type. Argument must be an instance of type ".
                 "\OpenActive\Models\OA\Dataset, ".
