@@ -7,10 +7,11 @@ use OpenActive\DatasetSiteTemplate\Meta;
 use OpenActive\Exceptions\InvalidArgumentException;
 use OpenActive\Helpers\JsonLd;
 use OpenActive\Helpers\Str;
-use OpenActive\Models\OA\Organization;
+use OpenActive\Models\OA\BookingService;
+use OpenActive\Models\OA\DataDownload;
+use OpenActive\Models\OA\Dataset;
 use OpenActive\Models\OA\ImageObject;
-use OpenActive\Models\SchemaOrg\DataDownload;
-use OpenActive\Models\SchemaOrg\Dataset;
+use OpenActive\Models\OA\Organization;
 
 /**
  *
@@ -84,6 +85,7 @@ class TemplateRenderer
             ],
             "license" => "https://creativecommons.org/licenses/by/4.0/",
             "discussionUrl" => $data["datasetSiteDiscussionUrl"],
+            "documentation" => $data["documentationUrl"],
             "inLanguage" => "en-GB",
             "schemaVersion" => "https://www.openactive.io/modelling-opportunity-data/2.0/",
             "publisher" => new Organization([
@@ -96,21 +98,20 @@ class TemplateRenderer
                     "url" => $data["organisationLogoUrl"]
                 ])
             ]),
+            "bookingService" => new BookingService([
+                "name" => $data["bookingServiceName"],
+                "url" => $data["bookingServiceUrl"],
+                "softwareVersion" => $data["bookingServiceSoftwareVersion"],
+            ]),
+            "backgroundImage" => new ImageObject([
+                "url" => $data["backgroundImageUrl"],
+            ]),
             "distribution" => $distribution,
             "datePublished" => new \DateTime("now", new \DateTimeZone("UTC")),
         ]);
 
-        // data that does not belong to the Dataset model but needs rendering anyway
-        $additionalData = array(
-            "backgroundImageUrl" => $data["backgroundImageUrl"],
-            "documentationUrl" => $data["documentationUrl"],
-            "platformName" => $data["platformName"],
-            "platformUrl" => $data["platformUrl"],
-            "softwareVersion" => $data["softwareVersion"],
-        );
-
         // Render compiled template with JSON-LD data
-        return $this->renderDatasetSite($dataset, $additionalData);
+        return $this->renderDatasetSite($dataset);
     }
 
     /**
@@ -120,7 +121,7 @@ class TemplateRenderer
      * @param array $additionalData Additional data not belonging to the Dataset model.
      * @return string Rendered template
      */
-    public function renderDatasetSite($model, $additionalData)
+    public function renderDatasetSite($model)
     {
         if($model instanceof OpenActive\Models\SchemaOrg\Dataset) {
             throw new InvalidArgumentException(
@@ -134,13 +135,7 @@ class TemplateRenderer
         $template = file_get_contents(__DIR__."/datasetsite.mustache");
 
         // Build data from model's getters
-        $data = array(
-            "backgroundImage" => $additionalData["backgroundImageUrl"],
-            "documentation" => $additionalData["documentationUrl"],
-            "platformName" => $additionalData["platformName"],
-            "platformUrl" => $additionalData["platformUrl"],
-            "softwareVersion" => $additionalData["softwareVersion"],
-        );
+        $data = array();
         $attributeNames = array(
             "backgroundImage",
             "bookingService",

@@ -61,14 +61,19 @@ Where `$data` could be defined like the following (as an example):
 ```php
 $data = array(
     "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+    "bookingServiceName" => "AcmeBooker",
+    "bookingServiceSoftwareVersion" => "0.1.0",
+    "bookingServiceUrl" => "https://acmebooker.example.com/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
+    "distributionTypes" => array(
+        DistributionType::FACILITY_USE,
+        DistributionType::SCHEDULED_SESSION,
+        DistributionType::SESSION_SERIES,
+        DistributionType::SLOT,
+    ),
     "documentationUrl" => "https://ourparks.org.uk/openbooking/",
     "email" => "hello@ourparks.org.uk",
-    "includeCourseInstanceFeed" => false,
-    "includeEventFeed" => false,
-    "includeScheduledSessionFeed" => true,
-    "includeSessionSeriesFeed" => true,
     "legalEntity" => "Our Parks",
     "name" => "Our Parks Sessions",
     "openDataBaseUrl" => "https://ourparks.org.uk/opendata/",
@@ -76,9 +81,6 @@ $data = array(
     "organisationName" => "Our Parks",
     "organisationUrl" => "https://ourparks.org.uk/",
     "plainTextDescription" => "Our Parks - turn up tone up!",
-    "platformName" => "AcmeBooker",
-    "platformUrl" => "https://acmebooker.example.com/",
-    "softwareVersion" => "1.2.3",
 );
 ```
 
@@ -90,40 +92,24 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 
 `$data` must contain the following keys:
 
-| Key                        | Type     | Description |
-| -------------------------- | -------- | ----------- |
-| `backgroundImageUrl`       | `string` | The background image to show on the page |
-| `datasetSiteDiscussionUrl` | `string` | The discussion URL for the dataset |
-| `datasetSiteUrl`           | `string` | The dataset site URL |
-| `distributionTypes`        | `array`  | An array of distribution model types. See [available types](#distributiontype) |
-| `documentationUrl`         | `string` | The documentation's URL |
-| `email`                    | `string` | The email of the publisher of this dataset |
-| `legalEntity`              | `string` | The legal name of the publisher of this dataset |
-| `name`                     | `string` | The name of the publisher of this dataset |
-| `openDataBaseUrl`          | `string` | The base OpenData URL for this dataset, used as a base URL for the feeds |
-| `organisationLogoUrl`      | `string` | A valid image URL of the organisation's logo |
-| `organisationName`         | `string` | The organisation's name |
-| `organisationUrl`          | `string` | The organisation's URL |
-| `plainTextDescription`     | `string` | The publisher's description in plain text |
-| `platformName`             | `string` | The platform's name |
-| `platformUrl`              | `string` | The platform's URL |
-| `softwareVersion`          | `string` | The platform's software version. |
-
-#### `renderDatasetSite($dataset, $additionalData)`
-
-Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$data`.
-
-`$dataset` must be a valid `\OpenActive\Models\SchemaOrg\Dataset` model.
-
-`$additionalData` must be an associative array with the following keys:
-
-| Key                  | Type     | Description |
-| -------------------- | -------- | ----------- |
-| `backgroundImageUrl` | `string` | The background image to show on the page; |
-| `documentationUrl`   | `string` | The documentation's URL; |
-| `platformName`       | `string` | The platform's name; |
-| `platformUrl`        | `string` | The platform's URL; |
-| `softwareVersion`    | `string` | The platform's software version. |
+| Key                             | Type     | Description |
+| ------------------------------- | -------- | ----------- |
+| `backgroundImageUrl`            | `string` | The background image to show on the page |
+| `bookingServiceName`            | `string` | The platform's name |
+| `bookingServiceSoftwareVersion` | `string` | The platform's software version. |
+| `bookingServiceUrl`             | `string` | The platform's URL |
+| `datasetSiteDiscussionUrl`      | `string` | The discussion URL for the dataset |
+| `datasetSiteUrl`                | `string` | The dataset site URL |
+| `distributionTypes`             | `array`  | An array of distribution model types. See [available types](#distributiontype) |
+| `documentationUrl`              | `string` | The documentation's URL |
+| `email`                         | `string` | The email of the publisher of this dataset |
+| `legalEntity`                   | `string` | The legal name of the publisher of this dataset |
+| `name`                          | `string` | The name of the publisher of this dataset |
+| `openDataBaseUrl`               | `string` | The base OpenData URL for this dataset, used as a base URL for the feeds |
+| `organisationLogoUrl`           | `string` | A valid image URL of the organisation's logo |
+| `organisationName`              | `string` | The organisation's name |
+| `organisationUrl`               | `string` | The organisation's URL |
+| `plainTextDescription`          | `string` | The publisher's description in plain text |
 
 #### `DistributionType`
 

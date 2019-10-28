@@ -10,6 +10,9 @@ use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 // Create new dataset
 $data = array(
     "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+    "bookingServiceName" => "AcmeBooker",
+    "bookingServiceSoftwareVersion" => "0.1.0",
+    "bookingServiceUrl" => "https://acmebooker.example.com/",
     "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
     "distributionTypes" => array(
@@ -27,9 +30,6 @@ $data = array(
     "organisationName" => "Our Parks",
     "organisationUrl" => "https://ourparks.org.uk/",
     "plainTextDescription" => "Our Parks - turn up tone up!",
-    "platformName" => "AcmeBooker",
-    "platformUrl" => "https://acmebooker.example.com/",
-    "softwareVersion" => "0.1.0",
 );
 
 // Render compiled template with data
