@@ -129,7 +129,7 @@ class TemplateRenderer
             "license" => "https://creativecommons.org/licenses/by/4.0/",
             "discussionUrl" => $settings["datasetDiscussionUrl"],
             "documentation" => $settings["datasetDocumentationUrl"],
-            "inLanguage" => "en-GB",
+            "inLanguage" => $settings["datasetLanguages"],
             "schemaVersion" => "https://www.openactive.io/modelling-opportunity-data/2.0/",
             "publisher" => new Organization([
                 "name" => $settings["organisationName"],
@@ -145,7 +145,7 @@ class TemplateRenderer
                 "url" => $settings["backgroundImageUrl"],
             ]),
             "distribution" => $dataDownloads,
-            "datePublished" => new \DateTime("now", new \DateTimeZone("UTC")),
+            "datePublished" => $settings["dateFirstPublished"],
         ]);
 
         // Only set BookingService if valid platformName provided

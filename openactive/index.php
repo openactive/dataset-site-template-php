@@ -12,6 +12,7 @@ $settings = array(
     "datasetDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
     "datasetDocumentationUrl" => "https://ourparks.org.uk/openbooking/",
+    "datasetLanguages" => array("en-GB"),
     "organisationEmail" => "hello@ourparks.org.uk",
     "organisationLegalEntity" => "Our Parks",
     "name" => "Our Parks Sessions",
@@ -24,6 +25,7 @@ $settings = array(
     "platformSoftwareVersion" => "0.1.0",
     "platformUrl" => "https://acmebooker.example.com/",
     "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+    "dateFirstPublished" => "2019-10-28",
 );
 
 $feedTypes = array(

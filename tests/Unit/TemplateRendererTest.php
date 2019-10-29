@@ -49,6 +49,7 @@ class TemplateRendererTest extends TestCase
             "datasetDiscussionUrl" => "https://github.com/ourparks/opendata",
             "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
             "datasetDocumentationUrl" => "https://ourparks.org.uk/openbooking/",
+            "datasetLanguages" => array("en-GB"),
             "organisationEmail" => "hello@ourparks.org.uk",
             "organisationLegalEntity" => "Our Parks",
             "openDataFeedBaseUrl" => "https://ourparks.org.uk/opendata/",
@@ -60,6 +61,7 @@ class TemplateRendererTest extends TestCase
             "platformUrl" => "https://acmebooker.example.com/",
             "platformSoftwareVersion" => "0.1.0",
             "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+            "dateFirstPublished" => "2019-10-28",
         );
 
         $supportedFeedTypes = array(
