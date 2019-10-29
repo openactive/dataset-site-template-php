@@ -141,17 +141,25 @@ class TemplateRenderer
                     "url" => $settings["organisationLogoUrl"]
                 ])
             ]),
-            "bookingService" => new BookingService([
-                "name" => $settings["platformName"],
-                "url" => $settings["platformUrl"],
-                "softwareVersion" => $settings["platformSoftwareVersion"],
-            ]),
             "backgroundImage" => new ImageObject([
                 "url" => $settings["backgroundImageUrl"],
             ]),
             "distribution" => $dataDownloads,
             "datePublished" => new \DateTime("now", new \DateTimeZone("UTC")),
         ]);
+
+        // Only set BookingService if valid platformName provided
+        if(
+            array_key_exists("platformName", $settings) &&
+            is_string($settings["platformName"]) &&
+            strlen($settings["platformName"]) > 0
+        ) {
+            $dataset->setBookingService(new BookingService([
+                "name" => $settings["platformName"],
+                "url" => $settings["platformUrl"],
+                "softwareVersion" => $settings["platformSoftwareVersion"],
+            ]));
+        }
 
         // Render compiled template with JSON-LD data
         return $this->renderDatasetSite($dataset);
