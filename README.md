@@ -60,21 +60,21 @@ echo (new TemplateRenderer())->renderSimpleDatasetSite($settings, $supportedFeed
 Where `$settings` could be defined like the following (as an example):
 ```php
 $settings = array(
-    "openDataFeedBaseUrl" => "https://ourparks.org.uk/opendata/",
-    "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
-    "datasetDiscussionUrl" => "https://github.com/ourparks/opendata",
-    "datasetDocumentationUrl" => "https://ourparks.org.uk/openbooking/",
+    "openDataFeedBaseUrl" => "https://customer.example.com/feed/",
+    "datasetSiteUrl" => "https://halo-odi.legendonlineservices.co.uk/openactive/",
+    "datasetDiscussionUrl" => "https://github.com/gll-better/opendata",
+    "datasetDocumentationUrl" => "https://docs.acmebooker.example.com/",
     "datasetLanguages" => array("en-GB"),
-    "organisationName" => "Our Parks",
-    "organisationUrl" => "https://ourparks.org.uk/",
-    "organisationLegalEntity" => "Our Parks",
-    "organisationPlainTextDescription" => "Our Parks - turn up tone up!",
-    "organisationLogoUrl" => "https://ourparks.org.uk/logo.png",
-    "organisationEmail" => "hello@ourparks.org.uk",
+    "organisationName" => "Better",
+    "organisationUrl" => "https://www.better.org.uk/",
+    "organisationLegalEntity" => "GLL",
+    "organisationPlainTextDescription" => "Established in 1993, GLL is the largest UK-based charitable social enterprise delivering leisure, health and community services. Under the consumer facing brand Better, we operate 258 public Sports and Leisure facilities, 88 libraries, 10 children’s centres and 5 adventure playgrounds in partnership with 50 local councils, public agencies and sporting organisations. Better leisure facilities enjoy 46 million visitors a year and have more than 650,000 members.",
+    "organisationLogoUrl" => "http://data.better.org.uk/images/logo.png",
+    "organisationEmail" => "info@better.org.uk",
     "platformName" => "AcmeBooker",
     "platformUrl" => "https://acmebooker.example.com/",
-    "platformSoftwareVersion" => "0.1.0",
-    "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+    "platformSoftwareVersion" => "2.0",
+    "backgroundImageUrl" => "https://data.better.org.uk/images/bg.jpg",
     "dateFirstPublished" => "2019-10-28",
 );
 ```

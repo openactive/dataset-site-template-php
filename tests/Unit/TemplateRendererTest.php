@@ -46,21 +46,21 @@ class TemplateRendererTest extends TestCase
     public function templateRendererProvider()
     {
         $data = array(
-            "datasetDiscussionUrl" => "https://github.com/ourparks/opendata",
-            "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
-            "datasetDocumentationUrl" => "https://ourparks.org.uk/openbooking/",
+            "datasetDiscussionUrl" => "https://github.com/gll-better/opendata",
+            "datasetSiteUrl" => "https://halo-odi.legendonlineservices.co.uk/openactive/",
+            "datasetDocumentationUrl" => "https://docs.acmebooker.example.com/",
             "datasetLanguages" => array("en-GB"),
-            "organisationEmail" => "hello@ourparks.org.uk",
-            "organisationLegalEntity" => "Our Parks",
-            "openDataFeedBaseUrl" => "https://ourparks.org.uk/opendata/",
-            "organisationLogoUrl" => "https://ourparks.org.uk/logo.png",
-            "organisationName" => "Our Parks",
-            "organisationUrl" => "https://ourparks.org.uk/",
-            "organisationPlainTextDescription" => "Our Parks - turn up tone up!",
+            "organisationEmail" => "info@better.org.uk",
+            "organisationLegalEntity" => "GLL",
+            "openDataFeedBaseUrl" => "https://customer.example.com/feed/",
+            "organisationLogoUrl" => "http://data.better.org.uk/images/logo.png",
+            "organisationName" => "Better",
+            "organisationUrl" => "https://www.better.org.uk/",
+            "organisationPlainTextDescription" => "Established in 1993, GLL is the largest UK-based charitable social enterprise delivering leisure, health and community services. Under the consumer facing brand Better, we operate 258 public Sports and Leisure facilities, 88 libraries, 10 children’s centres and 5 adventure playgrounds in partnership with 50 local councils, public agencies and sporting organisations. Better leisure facilities enjoy 46 million visitors a year and have more than 650,000 members.",
             "platformName" => "AcmeBooker",
             "platformUrl" => "https://acmebooker.example.com/",
-            "platformSoftwareVersion" => "0.1.0",
-            "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
+            "platformSoftwareVersion" => "2.0",
+            "backgroundImageUrl" => "https://data.better.org.uk/images/bg.jpg",
             "dateFirstPublished" => "2019-10-28",
         );
 
