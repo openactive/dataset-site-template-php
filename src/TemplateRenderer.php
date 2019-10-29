@@ -119,7 +119,7 @@ class TemplateRenderer
         $dataset = new Dataset([
             "id" => $settings["datasetSiteUrl"],
             "url" => $settings["datasetSiteUrl"],
-            "name" => $settings["name"],
+            "name" => $settings["organisationName"] . " " . $dataFeedHumanisedList,
             "description" => "Near real-time availability and rich ".
                 "descriptions relating to the ".
                 strtolower($dataFeedHumanisedList)." available from ".
