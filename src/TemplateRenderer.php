@@ -239,9 +239,17 @@ class TemplateRenderer
         // Length of list
         $listLength = count($list);
 
-        // Prepend last item with " and "
-        $list[$listLength - 1] = "and ".$list[$listLength - 1];
+        if($listLength === 0) {
+            return "";
+        }
 
-        return implode(", ", $list);
+        if($listLength === 1) {
+            return $list[0];
+        }
+
+        // Prepend last item with " and "
+        $listLastElement = " and ".$list[$listLength - 1];
+
+        return implode(", ", array_slice($list, 0, -1)) . $listLastElement;
     }
 }
