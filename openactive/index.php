@@ -9,21 +9,21 @@ use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 
 // Create new dataset
 $settings = array(
-    "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
-    "bookingServiceName" => "AcmeBooker",
-    "bookingServiceSoftwareVersion" => "0.1.0",
-    "bookingServiceUrl" => "https://acmebooker.example.com/",
-    "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
+    "datasetDiscussionUrl" => "https://github.com/ourparks/opendata",
     "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
-    "documentationUrl" => "https://ourparks.org.uk/openbooking/",
-    "email" => "hello@ourparks.org.uk",
-    "legalEntity" => "Our Parks",
+    "datasetDocumentationUrl" => "https://ourparks.org.uk/openbooking/",
+    "organisationEmail" => "hello@ourparks.org.uk",
+    "organisationLegalEntity" => "Our Parks",
     "name" => "Our Parks Sessions",
-    "openDataBaseUrl" => "https://ourparks.org.uk/opendata/",
+    "openDataFeedBaseUrl" => "https://ourparks.org.uk/opendata/",
     "organisationLogoUrl" => "https://ourparks.org.uk/logo.png",
     "organisationName" => "Our Parks",
     "organisationUrl" => "https://ourparks.org.uk/",
-    "plainTextDescription" => "Our Parks - turn up tone up!",
+    "organisationPlainTextDescription" => "Our Parks - turn up tone up!",
+    "platformName" => "AcmeBooker",
+    "platformSoftwareVersion" => "0.1.0",
+    "platformUrl" => "https://acmebooker.example.com/",
+    "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
 );
 
 $feedTypes = array(

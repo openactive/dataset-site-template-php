@@ -46,21 +46,20 @@ class TemplateRendererTest extends TestCase
     public function templateRendererProvider()
     {
         $data = array(
-            "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
-            "bookingServiceName" => "AcmeBooker",
-            "bookingServiceUrl" => "https://acmebooker.example.com/",
-            "bookingServiceSoftwareVersion" => "0.1.0",
-            "datasetSiteDiscussionUrl" => "https://github.com/ourparks/opendata",
+            "datasetDiscussionUrl" => "https://github.com/ourparks/opendata",
             "datasetSiteUrl" => "https://ourparks.org.uk/openactive",
-            "documentationUrl" => "https://ourparks.org.uk/openbooking/",
-            "email" => "hello@ourparks.org.uk",
-            "legalEntity" => "Our Parks",
-            "name" => "Our Parks Sessions",
-            "openDataBaseUrl" => "https://ourparks.org.uk/opendata/",
+            "datasetDocumentationUrl" => "https://ourparks.org.uk/openbooking/",
+            "organisationEmail" => "hello@ourparks.org.uk",
+            "organisationLegalEntity" => "Our Parks",
+            "openDataFeedBaseUrl" => "https://ourparks.org.uk/opendata/",
             "organisationLogoUrl" => "https://ourparks.org.uk/logo.png",
             "organisationName" => "Our Parks",
             "organisationUrl" => "https://ourparks.org.uk/",
-            "plainTextDescription" => "Our Parks - turn up tone up!",
+            "organisationPlainTextDescription" => "Our Parks - turn up tone up!",
+            "platformName" => "AcmeBooker",
+            "platformUrl" => "https://acmebooker.example.com/",
+            "platformSoftwareVersion" => "0.1.0",
+            "backgroundImageUrl" => "https://ourparks.org.uk/bg.jpg",
         );
 
         $supportedFeedTypes = array(

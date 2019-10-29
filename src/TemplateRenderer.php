@@ -64,7 +64,7 @@ class TemplateRenderer
                     "name" => $feedConfiguration->getName(),
                     "additionalType" => $feedConfiguration->getSameAs(),
                     "encodingFormat" => Meta::RPDE_MEDIA_TYPE,
-                    "contentUrl" => $settings["openDataBaseUrl"] . $feedConfiguration->getDefaultFeedPath()
+                    "contentUrl" => $settings["openDataFeedBaseUrl"] . $feedConfiguration->getDefaultFeedPath()
                 ]);
             },
             $selectedFeedConfigurations
@@ -127,24 +127,24 @@ class TemplateRenderer
                 "OpenActive Modelling Specification 2.0.",
             "keywords" => $keywords,
             "license" => "https://creativecommons.org/licenses/by/4.0/",
-            "discussionUrl" => $settings["datasetSiteDiscussionUrl"],
-            "documentation" => $settings["documentationUrl"],
+            "discussionUrl" => $settings["datasetDiscussionUrl"],
+            "documentation" => $settings["datasetDocumentationUrl"],
             "inLanguage" => "en-GB",
             "schemaVersion" => "https://www.openactive.io/modelling-opportunity-data/2.0/",
             "publisher" => new Organization([
                 "name" => $settings["organisationName"],
-                "legalName" => $settings["legalEntity"],
-                "description" => $settings["plainTextDescription"],
-                "email" => $settings["email"],
+                "legalName" => $settings["organisationLegalEntity"],
+                "description" => $settings["organisationPlainTextDescription"],
+                "email" => $settings["organisationEmail"],
                 "url" => $settings["organisationUrl"],
                 "logo" => new ImageObject([
                     "url" => $settings["organisationLogoUrl"]
                 ])
             ]),
             "bookingService" => new BookingService([
-                "name" => $settings["bookingServiceName"],
-                "url" => $settings["bookingServiceUrl"],
-                "softwareVersion" => $settings["bookingServiceSoftwareVersion"],
+                "name" => $settings["platformName"],
+                "url" => $settings["platformUrl"],
+                "softwareVersion" => $settings["platformSoftwareVersion"],
             ]),
             "backgroundImage" => new ImageObject([
                 "url" => $settings["backgroundImageUrl"],
