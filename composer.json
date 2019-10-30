@@ -1,16 +1,10 @@
 {
-  "name": "openactive/dataset-site-template-php",
+  "name": "openactive/dataset-site",
   "type": "project",
   "license": "MIT",
-  "repositories": [
-    {
-      "type": "path",
-      "url": "../models-php"
-    }
-  ],
   "require": {
     "mustache/mustache": "^2.12",
-    "openactive/models-php": "dev-master"
+    "openactive/models": "dev-master"
   },
   "autoload": {
     "psr-4": {
