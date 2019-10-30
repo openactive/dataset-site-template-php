@@ -26,18 +26,6 @@ While most of the functionality should work down to PHP 5.4, some functionality 
 
 This project also makes use of [Mustache](https://github.com/bobthecow/mustache.php) for rendering the template (installed via Composer).
 
-**Temporary:** You will also need a local copy of the [`models-php`](https://github.com/openactive/models-php) repo.
-This repository and the `models-php` will need to co-exist in the same parent directory, for example:
-```
-projects
-|- models-php
-|--- src
-|--- ...
-|- dataset-site-template-php
-|--- src
-|--- ...
-```
-
 ## Usage
 
 **Please Note:** This instruction are temporary and based on the current development status.
@@ -46,7 +34,7 @@ If you are developing this package, go to the [Development](#development) sectio
 
 To install from terminal, run:
 ```bash
-composer require openactive/dataset-site-template-php
+composer require openactive/dataset-site
 ```
 
 Wherever you want to render your Dataset page, include the following instructions:
