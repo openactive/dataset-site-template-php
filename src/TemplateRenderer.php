@@ -141,6 +141,7 @@ class TemplateRenderer
                     "url" => $settings["organisationLogoUrl"]
                 ])
             ]),
+            "dateModified" => new \DateTime("now", new \DateTimeZone("UTC")),
             "backgroundImage" => new ImageObject([
                 "url" => $settings["backgroundImageUrl"],
             ]),
@@ -189,6 +190,7 @@ class TemplateRenderer
         $attributeNames = array(
             "backgroundImage",
             "bookingService",
+            "dateModified",
             "datePublished",
             "description",
             "discussionUrl",
