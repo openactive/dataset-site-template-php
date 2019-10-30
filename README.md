@@ -13,7 +13,7 @@ For comparison, see the [.NET](https://github.com/openactive/dataset-site-templa
         - [`renderSimpleDatasetSiteFromDataDownloads($settings, $dataDownloads, $dataFeedDescriptions)`](#rendersimpledatasetsitefromdatadownloadssettings-datadownloads-datafeeddescriptions)
         - [`renderDatasetSite($dataset)`](#renderdatasetsitedataset)
         - [`FeedType`](#feedtype)
-- [Development](#development)
+- [Contribution](#contribution)
     - [Installation](#installation)
     - [Example](#example)
     - [Running Tests](#running-tests)
@@ -30,7 +30,7 @@ This project also makes use of [Mustache](https://github.com/bobthecow/mustache.
 
 **Please Note:** This instruction are temporary and based on the current development status.
 
-If you are developing this package, go to the [Development](#development) section.
+If you are developing this package, go to the [Contribution](#contribution) section.
 
 To install from terminal, run:
 ```bash
