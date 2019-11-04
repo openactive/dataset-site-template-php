@@ -5,7 +5,7 @@ This package intends to simplify creation of [OpenActive Dataset Sites](https://
 
 For comparison, see the [.NET](https://github.com/openactive/OpenActive.DatasetSite.NET/) and [Ruby](https://github.com/openactive/dataset-site-template-ruby) implementations.
 
-Please find full documentation that covers creation of accompanying GitHub issues board at https://developer.openactive.io/publishing-data/dataset-sites.
+Please find full documentation that covers creation of the accompanying GitHub issues board at https://developer.openactive.io/publishing-data/dataset-sites.
 
 
 ## Table Of Contents
