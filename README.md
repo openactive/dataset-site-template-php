@@ -1,7 +1,7 @@
 # dataset-site-template-php
 PHP Classes and resources supporting dataset site creation, to create something like [this example](https://opendata.fusion-lifestyle.com/OpenActive/) (or any of the other examples listed [here](http://status.openactive.io/)).
 
-This package intends to simplify creation of dataset sites using templates.
+This package intends to simplify creation of [OpenActive Dataset Sites](https://developer.openactive.io/publishing-data/dataset-sites) using templates.
 
 For comparison, see the [.NET](https://github.com/openactive/OpenActive.DatasetSite.NET/) and [Ruby](https://github.com/openactive/dataset-site-template-ruby) implementations.
 
