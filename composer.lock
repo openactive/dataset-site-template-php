@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "ace7652ff08bc19184d8547229b0ffd1",
@@ -58,12 +58,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/openactive/models-php.git",
-                "reference": "6ab0cd76f1fc58c44c4344feda8560b17210195e"
+                "reference": "e369e7b84fec12fda3f13c6747bf3a3c596f9643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openactive/models-php/zipball/6ab0cd76f1fc58c44c4344feda8560b17210195e",
-                "reference": "6ab0cd76f1fc58c44c4344feda8560b17210195e",
+                "url": "https://api.github.com/repos/openactive/models-php/zipball/e369e7b84fec12fda3f13c6747bf3a3c596f9643",
+                "reference": "e369e7b84fec12fda3f13c6747bf3a3c596f9643",
                 "shasum": ""
             },
             "require-dev": {
@@ -81,7 +81,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-10-30T11:16:26+00:00"
+            "time": "2019-11-06T09:42:23+00:00"
         }
     ],
     "packages-dev": [
