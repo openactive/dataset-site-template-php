@@ -4,7 +4,7 @@
   "license": "MIT",
   "require": {
     "mustache/mustache": "^2.12",
-    "openactive/models": "dev-validate-times"
+    "openactive/models": "dev-master"
   },
   "autoload": {
     "psr-4": {
