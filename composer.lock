@@ -58,12 +58,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/openactive/models-php.git",
-                "reference": "b154d3ce24ffc4b7ce4bb9c36bdbbca0e4467b63"
+                "reference": "6f1d787c213eddd07e6e18b95e51915881cb1ddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openactive/models-php/zipball/b154d3ce24ffc4b7ce4bb9c36bdbbca0e4467b63",
-                "reference": "b154d3ce24ffc4b7ce4bb9c36bdbbca0e4467b63",
+                "url": "https://api.github.com/repos/openactive/models-php/zipball/6f1d787c213eddd07e6e18b95e51915881cb1ddc",
+                "reference": "6f1d787c213eddd07e6e18b95e51915881cb1ddc",
                 "shasum": ""
             },
             "require-dev": {
@@ -81,7 +81,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-11-07T13:22:45+00:00"
+            "time": "2019-11-27T14:58:02+00:00"
         }
     ],
     "packages-dev": [
