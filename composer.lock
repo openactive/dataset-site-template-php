@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ace7652ff08bc19184d8547229b0ffd1",
+    "content-hash": "06874c62cc14a47edf177e6105150ce9",
     "packages": [
         {
             "name": "mustache/mustache",
@@ -54,16 +54,16 @@
         },
         {
             "name": "openactive/models",
-            "version": "dev-master",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openactive/models-php.git",
-                "reference": "6f1d787c213eddd07e6e18b95e51915881cb1ddc"
+                "reference": "c4ab14b3af9729b7ef8a1ab1641ba24d0d3e935c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openactive/models-php/zipball/6f1d787c213eddd07e6e18b95e51915881cb1ddc",
-                "reference": "6f1d787c213eddd07e6e18b95e51915881cb1ddc",
+                "url": "https://api.github.com/repos/openactive/models-php/zipball/c4ab14b3af9729b7ef8a1ab1641ba24d0d3e935c",
+                "reference": "c4ab14b3af9729b7ef8a1ab1641ba24d0d3e935c",
                 "shasum": ""
             },
             "require-dev": {
@@ -81,7 +81,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-11-27T14:58:02+00:00"
+            "time": "2019-11-28T17:27:21+00:00"
         }
     ],
     "packages-dev": [
@@ -1267,9 +1267,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "openactive/models": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
