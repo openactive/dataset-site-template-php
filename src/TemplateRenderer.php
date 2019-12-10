@@ -123,8 +123,7 @@ class TemplateRenderer
             "description" => "Near real-time availability and rich ".
                 "descriptions relating to the ".
                 strtolower($dataFeedHumanisedList)." available from ".
-                $settings["organisationName"].", published using the ".
-                "OpenActive Modelling Specification 2.0.",
+                $settings["organisationName"],
             "keywords" => $keywords,
             "license" => "https://creativecommons.org/licenses/by/4.0/",
             "discussionUrl" => $settings["datasetDiscussionUrl"],
