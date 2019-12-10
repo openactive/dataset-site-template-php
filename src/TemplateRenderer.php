@@ -208,11 +208,11 @@ class TemplateRenderer
 
             // If an object, we prepare it for serialization
             if(is_object($value)) {
-                $value = JsonLd::prepareDataForSerialization($value);
+                $value = JsonLd::prepareDataForSerialization($value, null, true);
             } else if (is_array($value)) {
                 $value = array_map(
-                    function($distributionItem) {
-                        return JsonLd::prepareDataForSerialization($distributionItem);
+                    static function($distributionItem) {
+                        return JsonLd::prepareDataForSerialization($distributionItem, null, true);
                     },
                     $value
                 );

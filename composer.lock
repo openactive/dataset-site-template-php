@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "06874c62cc14a47edf177e6105150ce9",
+    "content-hash": "00960ea9cd463ffc29ebe7ad83696b07",
     "packages": [
         {
             "name": "mustache/mustache",
@@ -54,7 +54,7 @@
         },
         {
             "name": "openactive/models",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openactive/models-php.git",
@@ -1270,6 +1270,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.5"
+    },
     "platform-dev": []
 }
