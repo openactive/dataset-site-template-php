@@ -5,7 +5,7 @@
   "require": {
     "php": ">=5.5",
     "mustache/mustache": "^2.12",
-    "openactive/models": "^0.5.0"
+    "openactive/models": "^0.6"
   },
   "autoload": {
     "psr-4": {
