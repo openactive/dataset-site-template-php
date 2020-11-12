@@ -104,8 +104,7 @@ class TemplateRenderer
         $settings,
         $dataDownloads,
         $dataFeedDescriptions
-    )
-    {
+    ) {
         // Pre-process list of feed descriptions
         $dataFeedHumanisedList = $this->toHumanisedList($dataFeedDescriptions);
         $keywords = array_merge($dataFeedDescriptions, array(
@@ -147,6 +146,10 @@ class TemplateRenderer
             "distribution" => $dataDownloads,
             "datePublished" => $settings["dateFirstPublished"],
         ]);
+
+        if (isset($settings["accessService"])) {
+            $dataset->setAccessService($settings["accessService"]);
+        }
 
         // Only set BookingService if valid platformName provided
         if(
