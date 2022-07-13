@@ -183,12 +183,12 @@ class TemplateRenderer
             is_string($settings["testSuiteCertificateUrl"]) &&
             strlen($settings["testSuiteCertificateUrl"]) > 0
         )) {
-            $dataset->setBookingService(new BookingService([
-                "name" => $settings["platformName"],
-                "url" => $settings["platformUrl"],
-                "softwareVersion" => $settings["platformSoftwareVersion"],
-                "hasCredential" => $settings["testSuiteCertificateUrl"],
-            ]));
+            $dataset->setBookingService(new BookingService(array_filter([
+                "name" => isset($settings["platformName"]) ? $settings["platformName"] : null,
+                "url" => isset($settings["platformUrl"]) ? $settings["platformUrl"] : null,
+                "softwareVersion" => isset($settings["platformSoftwareVersion"]) ? $settings["platformSoftwareVersion"] : null,
+                "hasCredential" => isset($settings["testSuiteCertificateUrl"]) ? $settings["testSuiteCertificateUrl"] : null,
+            ])));
         }
 
         // Render compiled template with JSON-LD data

@@ -34,10 +34,15 @@ class TemplateRendererTest extends TestCase
      */
     public function testRenderString($renderer, $data, $supportedFeedTypes)
     {
-        $this->assertInternalType(
-            "string",
-            $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes)
-        );
+        // assertInternalType has been deprecated by phpunit
+        if (method_exists($this,'assertIsString')) {
+            $this->assertIsString($renderer->renderSimpleDatasetSite($data, $supportedFeedTypes));
+        } else {
+            $this->assertInternalType(
+                "string",
+                $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes)
+            );
+        }
     }
 
     /**
