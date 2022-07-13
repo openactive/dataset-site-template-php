@@ -196,11 +196,11 @@ composer install
 ```
 
 ### Example
-From a web server capable of interpreting and compiling PHP, navigate to the `/openactive` folder.
+From a web server capable of interpreting and compiling PHP, navigate to the `/examples/openactive` or `/examples/openactive-csp` folders.
 
 From there you should be able to see the template populated with the JSON-LD data.
 
-The default mustache template (`datasetsite.mustache`) is included under the `src` folder.
+The default mustache templates (`datasetsite.mustache` and `datasetsite-csp.mustache`) are included under the `src` folder.
 
 In `index.php` you can find an example of the associative array that's going to get parsed by `TemplateRenderer`.
 
