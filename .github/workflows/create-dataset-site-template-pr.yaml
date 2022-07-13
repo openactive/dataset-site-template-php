@@ -29,7 +29,9 @@ jobs:
         working-directory: ./
 
       - name: Update assets in example
-        run: unzip -o ./src/datasetsite-csp.static.zip -d ./examples/openactive-csp/assets/
+        run: |
+          ls -R
+          unzip -o ./src/datasetsite-csp.static.zip -d ./examples/openactive-csp/assets/
         working-directory: ./
         
       - name: git stash if material changes have not been made
