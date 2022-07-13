@@ -1,5 +1,6 @@
 {
   "name": "openactive/dataset-site",
+  "description": "Library for rendering the OpenActive dataset site",
   "type": "project",
   "license": "MIT",
   "require": {
