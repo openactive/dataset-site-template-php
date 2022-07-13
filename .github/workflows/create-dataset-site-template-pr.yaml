@@ -8,7 +8,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    
+
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
         working-directory: ./
 
       - name: Update assets in example
-        run: unzip ./src/datasetsite-csp.static.zip -d ./examples/openactive-csp/assets/
+        run: unzip -o ./src/datasetsite-csp.static.zip -d ./examples/openactive-csp/assets/
         working-directory: ./
         
       - name: git stash if material changes have not been made
