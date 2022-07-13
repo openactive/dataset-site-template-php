@@ -35,7 +35,7 @@ class TemplateRendererTest extends TestCase
     public function testRenderString($renderer, $data, $supportedFeedTypes)
     {
         // assertInternalType has been deprecated by phpunit
-        $outputHtml = $renderer->renderSimpleDatasetSite($data, $supportedFeedType);
+        $outputHtml = $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes);
         if (method_exists($this,'assertIsString')) {
             $this->assertIsString($outputHtml);
         } else {
