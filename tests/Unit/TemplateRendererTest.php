@@ -34,7 +34,7 @@ class TemplateRendererTest extends TestCase
      */
     public function testRenderString($renderer, $data, $supportedFeedTypes)
     {
-        // assertInternalType has been deprecated by phpunit
+        // assertInternalType has been deprecated by the newer PHPUnit, however it is still required here for when the tests run in PHP 5.6 / PHPUnit 5.7
         $outputHtml = $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes);
         if (method_exists($this,'assertIsString')) {
             $this->assertIsString($outputHtml);
@@ -54,7 +54,7 @@ class TemplateRendererTest extends TestCase
      */
     public function testRenderStringCSP($renderer, $data, $supportedFeedTypes)
     {
-        // assertInternalType has been deprecated by phpunit
+        // assertInternalType has been deprecated by the newer PHPUnit, however it is still required here for when the tests run in PHP 5.6 / PHPUnit 5.7
         $outputHtml = $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes, "/example/asset/path");
         if (method_exists($this,'assertIsString')) {
             $this->assertIsString($outputHtml);
