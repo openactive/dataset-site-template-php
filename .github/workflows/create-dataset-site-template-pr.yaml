@@ -1,0 +1,63 @@
+name: Update Dataset Site Template
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [dataset-site-template-update]
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Setup Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Update dataset site template to latest version
+        run: npx @openactive/dataset-site-template@latest --raw ./src
+        
+      - name: git stash if material changes have not been made
+        # When considering whether it's worth making a PR, ignore the following:
+        # - The dataset-site-template version number updating within the template in datasetsite.mustache and datasetsite-csp.mustache (affects one line)
+        # - Any updates to datasetsite-csp.static.zip
+        # git stashing if no material changes allows the next step to close the PR if one is already open
+        run: if [ "$(git diff --numstat | grep -vc '^1.*datasetsite\.mustache\|1.*datasetsite-csp\.mustache\|.*datasetsite-csp\.static\.zip$')" -eq "0" ]; then git stash; else echo "Material changes found"; fi
+        working-directory: ./
+        
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          path: ./
+          token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+          commit-message: Update dataset site template
+          committer: openactive-bot <openactive-bot@users.noreply.github.com>
+          author: openactive-bot <openactive-bot@users.noreply.github.com>
+          signoff: false
+          branch: ci/update-data-models
+          delete-branch: true
+          title: 'Update data models'
+          body: |
+            Update to the latest version of the [Dataset Site Template](https://github.com/openactive/dataset-site-template)
+          labels: |
+            automated pr
+          team-reviewers: |
+            owners
+            maintainers
+          draft: false
+
+      - name: Check outputs
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
