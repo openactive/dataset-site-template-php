@@ -27,7 +27,7 @@ class TemplateRendererTest extends TestCase
     }
 
     /**
-     * Test that the template renderer renders a string.
+     * Test that the template renderer renders a string for the single-file template.
      *
      * @dataProvider templateRendererProvider
      * @return void
@@ -41,6 +41,25 @@ class TemplateRendererTest extends TestCase
             $this->assertInternalType(
                 "string",
                 $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes)
+            );
+        }
+    }
+
+    /**
+     * Test that the template renderer renders a string for the CSP template.
+     *
+     * @dataProvider templateRendererProvider
+     * @return void
+     */
+    public function testRenderStringCSP($renderer, $data, $supportedFeedTypes)
+    {
+        // assertInternalType has been deprecated by phpunit
+        if (method_exists($this,'assertIsString')) {
+            $this->assertIsString($renderer->renderSimpleDatasetSite($data, $supportedFeedTypes));
+        } else {
+            $this->assertInternalType(
+                "string",
+                $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes, "/example/asset/path")
             );
         }
     }
