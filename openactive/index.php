@@ -26,6 +26,12 @@ $settings = array(
     "platformUrl" => "https://acmebooker.example.com/",
     "backgroundImageUrl" => "https://data.better.org.uk/images/bg.jpg",
     "dateFirstPublished" => "2019-10-28",
+    "OpenBookingAPIBaseUrl" => "https://reference-implementation.openactive.io/api/openbooking",
+    "OpenBookingAPIAuthenticationAuthorityUrl" => "https://auth.reference-implementation.openactive.io",
+    "OpenBookingAPIDocumentationUrl" => "https://developer.openactive.io/go/open-booking-api",
+    "OpenBookingAPITermsOfServiceUrl" => "https://example.com/api-terms-page",
+    "OpenBookingAPIRegistrationUrl" => "https://example.com/api-landing-page",
+    "TestSuiteCertificateUrl" => "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/"
 );
 
 $feedTypes = array(

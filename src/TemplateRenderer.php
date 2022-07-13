@@ -12,6 +12,7 @@ use OpenActive\Models\OA\DataDownload;
 use OpenActive\Models\OA\Dataset;
 use OpenActive\Models\OA\ImageObject;
 use OpenActive\Models\OA\Organization;
+use OpenActive\Models\OA\WebAPI;
 
 /**
  *
@@ -40,9 +41,10 @@ class TemplateRenderer
      *
      * @param array $settings
      * @param FeedType[] $supportedFeedTypes
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
-    public function renderSimpleDatasetSite($settings, $supportedFeedTypes)
+    public function renderSimpleDatasetSite($settings, $supportedFeedTypes, $staticAssetsPathUrl = null)
     {
         // Get available distributionTypes
         $distributionTypeConstants = (
@@ -87,7 +89,8 @@ class TemplateRenderer
         return $this->renderSimpleDatasetSiteFromDataDownloads(
             $settings,
             $dataDownloads,
-            $dataFeedDescriptions
+            $dataFeedDescriptions,
+            $staticAssetsPathUrl
         );
     }
 
@@ -98,12 +101,14 @@ class TemplateRenderer
      * @param array $settings
      * @param DataDownload[] $dataDownloads
      * @param string[] $dataFeedDescriptions
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
     public function renderSimpleDatasetSiteFromDataDownloads(
         $settings,
         $dataDownloads,
-        $dataFeedDescriptions
+        $dataFeedDescriptions,
+        $staticAssetsPathUrl = null
     ) {
         // Pre-process list of feed descriptions
         $dataFeedHumanisedList = $this->toHumanisedList($dataFeedDescriptions);
@@ -147,6 +152,23 @@ class TemplateRenderer
             "datePublished" => $settings["dateFirstPublished"],
         ]);
 
+        if (isset($settings["openBookingAPIBaseUrl"])) {
+            $dataset->setAccessService(new WebAPI([
+                "name" => "Open Booking API",
+                "description" => "An API that allows for seamless booking experiences to be created for sessions and facilities available from Fusion Lifestyle",
+                "authenticationAuthority" => $settings["openBookingAPIAuthenticationAuthorityUrl"],
+                "conformsTo" => array(
+                  "https://openactive.io/open-booking-api/EditorsDraft/"
+                ),
+                "documentation" => $settings["openBookingAPIDocumentationUrl"],
+                "endpointDescription" => "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
+                "endpointUrl" => $settings["openBookingAPIBaseUrl"],
+                "landingPage" => $settings["openBookingAPIRegistrationUrl"],
+                "termsOfService" => $settings["openBookingAPITermsOfServiceUrl"],
+            ]));
+        }
+        
+        // Also support setting accessService as a legacy feature, which is not documented
         if (isset($settings["accessService"])) {
             $dataset->setAccessService($settings["accessService"]);
         }
@@ -161,20 +183,22 @@ class TemplateRenderer
                 "name" => $settings["platformName"],
                 "url" => $settings["platformUrl"],
                 "softwareVersion" => $settings["platformSoftwareVersion"],
+                "hasCredential" => $settings["testSuiteCertificateUrl"],
             ]));
         }
 
         // Render compiled template with JSON-LD data
-        return $this->renderDatasetSite($dataset);
+        return $this->renderDatasetSite($dataset, $staticAssetsPathUrl);
     }
 
     /**
      * Render the template from a given OpenActive dataset model.
      *
      * @param \OpenActive\Models\Dataset $dataset The OpenActive model.
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
-    public function renderDatasetSite($dataset)
+    public function renderDatasetSite($dataset, $staticAssetsPathUrl = null)
     {
         if($dataset instanceof OpenActive\Models\OA\Dataset) {
             throw new InvalidArgumentException(
@@ -184,11 +208,21 @@ class TemplateRenderer
             );
         }
 
-        // Get template from FS
-        $template = file_get_contents(__DIR__."/datasetsite.mustache");
+        // Data to pass the mustache template
+        $data = array();
+
+        // Determine which template to use based on whether $staticAssetsPathUrl is set
+        if (is_null($staticAssetsPathUrl)) {
+            $templateFilename = "/datasetsite.mustache";
+        } else {
+            $templateFilename = "/datasetsite-csp.mustache";
+            $data["staticAssetsPathUrl"] = $staticAssetsPathUrl;
+        }
+
+        // Get relevant template from FS
+        $template = file_get_contents(__DIR__.$templateFilename);
 
         // Build data from model's getters
-        $data = array();
         $attributeNames = array(
             "backgroundImage",
             "bookingService",
@@ -203,6 +237,7 @@ class TemplateRenderer
             "publisher",
             "schemaVersion",
             "url",
+            "accessService"
         );
         foreach ($attributeNames as $attributeName) {
             $getterName = "get" . Str::pascal($attributeName);

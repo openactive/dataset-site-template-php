@@ -48,6 +48,14 @@ use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 echo (new TemplateRenderer())->renderSimpleDatasetSite($settings, $supportedFeedTypes);
 ```
 
+Or to render a [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options), first ensure that you are serving the [CSP compatible static assets](/src/datasetsite-csp.static.zip) from this version of the PHP package at a URL, and then include the following:
+```php
+use OpenActive\DatasetSiteTemplate\TemplateRenderer;
+
+// Render compiled template with data
+echo (new TemplateRenderer())->renderSimpleDatasetSite($settings, $supportedFeedTypes, $staticAssetsPathUrl);
+```
+
 Where `$settings` could be defined like the following (as an example):
 ```php
 $settings = array(
@@ -67,6 +75,12 @@ $settings = array(
     "platformSoftwareVersion" => "2.0",
     "backgroundImageUrl" => "https://data.better.org.uk/images/bg.jpg",
     "dateFirstPublished" => "2019-10-28",
+    "openBookingAPIBaseUrl" => "https://reference-implementation.openactive.io/api/openbooking",
+    "openBookingAPIAuthenticationAuthorityUrl" => "https://auth.reference-implementation.openactive.io",
+    "openBookingAPIDocumentationUrl" => "https://developer.openactive.io/go/open-booking-api",
+    "openBookingAPITermsOfServiceUrl" => "https://example.com/api-terms-page",
+    "openBookingAPIRegistrationUrl" => "https://example.com/api-landing-page",
+    "testSuiteCertificateUrl" => "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
 );
 ```
 
@@ -92,30 +106,38 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 
 ##### Settings
 
-| Key                                | Type       | Description |
-| ---------------------------------- | ---------- | ----------- |
-| `openDataFeedBaseUrl`              | `string`   | The the base URL for the open data feeds |
-| `datasetSiteUrl`                   | `string`   | The URL where this dataset site is displayed (the page's own URL) |
-| `datasetDiscussionUrl`             | `string`   | The GitHub issues page for the dataset |
-| `datasetDocumentationUrl`          | `string`   | Any documentation specific to the dataset. Defaults to https://developer.openactive.io/ if not provided, which should be used if no documentation is available. |
-| `datasetLanguages`                 | `string[]` | The languages available in the dataset, following the IETF BCP 47 standard. Defaults to `array("en-GB")`. |
-| `organisationName`                 | `string`   | The publishing organisation's name |
-| `organisationUrl`                  | `string`   | The publishing organisation's URL |
-| `organisationLegalEntity`          | `string`   | The legal name of the publishing organisation of this dataset |
-| `organisationPlainTextDescription` | `string`   | A plain text description of this organisation |
-| `organisationLogoUrl`              | `string`   | An image URL of the publishing organisation's logo, ideally in PNG format |
-| `organisationEmail`                | `string`   | The contact email of the publishing organisation of this dataset |
-| `platformName`                     | `string`   | The software platform's name. Only set this if different from the publishing organisation, otherwise leave as null to exclude platform metadata. |
-| `platformUrl`                      | `string`   | The software platform's website |
-| `platformSoftwareVersion`          | `string`   | The software platform's software version |
-| `backgroundImageUrl`               | `string`   | The background image to show on the Dataset Site page |
-| `dateFirstPublished`               | `string`   | The date the dataset was first published |
+| Key                                        | Type       | Description |
+| -------------------------------------------| ---------- | ----------- |
+| `openDataFeedBaseUrl`                      | `string`   | The the base URL for the open data feeds |
+| `datasetSiteUrl`                           | `string`   | The URL where this dataset site is displayed (the page's own URL) |
+| `datasetDiscussionUrl`                     | `string`   | The GitHub issues page for the dataset |
+| `datasetDocumentationUrl`                  | `string`   | Any documentation specific to the dataset. Defaults to https://developer.openactive.io/ if not provided, which should be used if no documentation is available. |
+| `datasetLanguages`                         | `string[]` | The languages available in the dataset, following the IETF BCP 47 standard. Defaults to `array("en-GB")`. |
+| `organisationName`                         | `string`   | The publishing organisation's name |
+| `organisationUrl`                          | `string`   | The publishing organisation's URL |
+| `organisationLegalEntity`                  | `string`   | The legal name of the publishing organisation of this dataset |
+| `organisationPlainTextDescription`         | `string`   | A plain text description of this organisation |
+| `organisationLogoUrl`                      | `string`   | An image URL of the publishing organisation's logo, ideally in PNG format |
+| `organisationEmail`                        | `string`   | The contact email of the publishing organisation of this dataset |
+| `platformName`                             | `string`   | The software platform's name. Only set this if different from the publishing organisation, otherwise leave as null to exclude platform metadata. |     
+| `platformUrl`                              | `string`   | The software platform's website |
+| `platformSoftwareVersion`                  | `string`   | The software platform's software version |
+| `backgroundImageUrl`                       | `string`   | The background image to show on the Dataset Site page |
+| `dateFirstPublished`                       | `string`   | The date the dataset was first published |  
+| `openBookingAPIBaseUrl`                    | `string`   | The Base URI of this implementation of the Open Booking API |
+| `openBookingAPIAuthenticationAuthorityUrl` | `string`   | The location of the OpenID Provider that must be used to access the API |
+| `openBookingAPIDocumentationUrl`           | `string`   | The URL of documentation related to how to use the Open Booking API. Defaults to https://developer.openactive.io/go/open-booking-api if not provided, which should be used if no documentation is available. |
+| `openBookingAPITermsOfServiceUrl`          | `string`   | The URL of terms of service related to the use of this API |
+| `openBookingAPIRegistrationUrl`            | `string`   | The URL of a web page that the Broker may use to obtain access to the API, e.g. via a web form |
+| `testSuiteCertificateUrl`                  | `string`   | The URL of the OpenActive Test Suite certificate for this booking system |
 
 And `$supportedFeedTypes` must be an `array` of `FeedType` constants, which auto-generates the metadata associated which each feed using best-practice values. See [available types](#feedtype)
 
-#### `renderSimpleDatasetSiteFromDataDownloads($settings, $dataDownloads, $dataFeedDescriptions)`
+#### `renderSimpleDatasetSiteFromDataDownloads($settings, $dataDownloads, $dataFeedDescriptions, $staticAssetsPathUrl = null)`
 
 Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, the provided [`$settings`](#settings), `$dataDownloads` and `$dataFeedDescriptions`.
+
+If `$staticAssetsPathUrl` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the [CSP compatible static assets](/src/datasetsite-csp.static.zip) from this version of the PHP package.
 
 The `$dataDownloads` argument must be an `array` of `\OpenActive\Models\OA\DataDownload` objects, which each describe an available open data feed.
 
@@ -127,9 +149,11 @@ $dataFeedDescriptions = array(
 );
 ```
 
-#### `renderDatasetSite($dataset)`
+#### `renderDatasetSite($dataset, $staticAssetsPathUrl = null)`
 
 Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$dataset`.
+
+If `$staticAssetsPathUrl` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the [CSP compatible static assets](/src/datasetsite-csp.static.zip) from this version of the PHP package.
 
 The `$dataset` argument must be an object of type `\OpenActive\Models\OA\Dataset`, and must contain the properties required to render the dataset site.
 
