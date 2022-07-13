@@ -155,7 +155,9 @@ class TemplateRenderer
         if (isset($settings["openBookingAPIBaseUrl"])) {
             $dataset->setAccessService(new WebAPI([
                 "name" => "Open Booking API",
-                "description" => "An API that allows for seamless booking experiences to be created for sessions and facilities available from Fusion Lifestyle",
+                "description" => "An API that allows for seamless booking experiences to be created for ".
+                    strtolower($dataFeedHumanisedList)." available from ".
+                    $settings["organisationName"],
                 "authenticationAuthority" => $settings["openBookingAPIAuthenticationAuthorityUrl"],
                 "conformsTo" => array(
                   "https://openactive.io/open-booking-api/EditorsDraft/"
