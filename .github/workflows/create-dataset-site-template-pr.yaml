@@ -25,7 +25,7 @@ jobs:
           node-version: 14.x
 
       - name: Update dataset site template to latest version
-        run: npx @openactive/dataset-site-template@latest --raw ./src
+        run: npx @openactive/dataset-site-template@latest --raw "./src/"
         
       - name: git stash if material changes have not been made
         # When considering whether it's worth making a PR, ignore the following:
