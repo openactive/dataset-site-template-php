@@ -35,12 +35,13 @@ class TemplateRendererTest extends TestCase
     public function testRenderString($renderer, $data, $supportedFeedTypes)
     {
         // assertInternalType has been deprecated by phpunit
+        $outputHtml = $renderer->renderSimpleDatasetSite($data, $supportedFeedType);
         if (method_exists($this,'assertIsString')) {
-            $this->assertIsString($renderer->renderSimpleDatasetSite($data, $supportedFeedTypes));
+            $this->assertIsString($outputHtml);
         } else {
             $this->assertInternalType(
                 "string",
-                $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes)
+                $outputHtml
             );
         }
     }
@@ -54,12 +55,13 @@ class TemplateRendererTest extends TestCase
     public function testRenderStringCSP($renderer, $data, $supportedFeedTypes)
     {
         // assertInternalType has been deprecated by phpunit
+        $outputHtml = $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes, "/example/asset/path");
         if (method_exists($this,'assertIsString')) {
-            $this->assertIsString($renderer->renderSimpleDatasetSite($data, $supportedFeedTypes));
+            $this->assertIsString($outputHtml);
         } else {
             $this->assertInternalType(
                 "string",
-                $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes, "/example/asset/path")
+                $outputHtml
             );
         }
     }
