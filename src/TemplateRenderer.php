@@ -174,11 +174,15 @@ class TemplateRenderer
         }
 
         // Only set BookingService if valid platformName provided
-        if(
+        if((
             array_key_exists("platformName", $settings) &&
             is_string($settings["platformName"]) &&
             strlen($settings["platformName"]) > 0
-        ) {
+        ) || (
+            array_key_exists("testSuiteCertificateUrl", $settings) &&
+            is_string($settings["testSuiteCertificateUrl"]) &&
+            strlen($settings["testSuiteCertificateUrl"]) > 0
+        )) {
             $dataset->setBookingService(new BookingService([
                 "name" => $settings["platformName"],
                 "url" => $settings["platformUrl"],
