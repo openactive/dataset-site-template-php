@@ -264,7 +264,7 @@ class TemplateRenderer
         }
 
         // JSON-LD is the serialized content
-        $data["json"] = Dataset::serialize($dataset, true, true);
+        $data["jsonld"] = Dataset::serialize($dataset, true, true);
 
         // Render compiled template with JSON-LD data
         return $this->mustacheEngine->render($template, $data);
