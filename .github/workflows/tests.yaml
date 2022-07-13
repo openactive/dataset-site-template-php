@@ -42,3 +42,15 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+
+    - name: Output rendering example as an artifact
+      run: |
+        mkdir -p ./output/
+        php openactive/index.php > index.html
+
+    - name: Upload example rendering
+      uses: actions/upload-artifact@v2
+      if: ${{ success() || failure() }}
+      with:
+        name: example-rendering
+        path: ./output/
