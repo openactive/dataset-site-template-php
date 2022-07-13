@@ -205,7 +205,7 @@ The default mustache templates (`datasetsite.mustache` and `datasetsite-csp.must
 In `index.php` you can find an example of the associative array that's going to get parsed by `TemplateRenderer`.
 
 ### Running Tests
-PHPUnit 4.8 is used to run tests.
+PHPUnit is used to run tests.
 
 To run the whole suite:
 ```bash
