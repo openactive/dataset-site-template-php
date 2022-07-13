@@ -52,5 +52,5 @@ jobs:
       uses: actions/upload-artifact@v2
       if: ${{ success() || failure() }}
       with:
-        name: example-rendering
+        name: example-rendering-php-${{ matrix.php-versions }}
         path: ./output/
