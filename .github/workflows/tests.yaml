@@ -46,7 +46,7 @@ jobs:
     - name: Output rendering example as an artifact
       run: |
         mkdir -p ./output/
-        php openactive/index.php > index.html
+        php openactive/index.php > ./output/index.html
 
     - name: Upload example rendering
       uses: actions/upload-artifact@v2
