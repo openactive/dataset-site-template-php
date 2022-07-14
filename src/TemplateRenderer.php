@@ -131,7 +131,7 @@ class TemplateRenderer
             "keywords" => $keywords,
             "license" => "https://creativecommons.org/licenses/by/4.0/",
             "discussionUrl" => $settings["datasetDiscussionUrl"],
-            "documentation" => $settings["datasetDocumentationUrl"],
+            "documentation" => isset($settings["datasetDocumentationUrl"]) ? $settings["datasetDocumentationUrl"] : "https://permalink.openactive.io/dataset-site/open-data-documentation",
             "inLanguage" => $settings["datasetLanguages"],
             "schemaVersion" => "https://www.openactive.io/modelling-opportunity-data/2.0/",
             "publisher" => new Organization([
@@ -162,7 +162,7 @@ class TemplateRenderer
                 "conformsTo" => array(
                   "https://openactive.io/open-booking-api/EditorsDraft/"
                 ),
-                "documentation" => $settings["openBookingAPIDocumentationUrl"],
+                "documentation" =>  isset($settings["openBookingAPIDocumentationUrl"]) ? $settings["openBookingAPIDocumentationUrl"] : "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
                 "endpointDescription" => "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
                 "endpointUrl" => $settings["openBookingAPIBaseUrl"],
                 "landingPage" => $settings["openBookingAPIRegistrationUrl"],

@@ -11,7 +11,7 @@ use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 $settings = [
     "datasetDiscussionUrl" => "https://github.com/gll-better/opendata",
     "datasetSiteUrl" => "https://halo-odi.legendonlineservices.co.uk/openactive/",
-    "datasetDocumentationUrl" => "https://docs.acmebooker.example.com/",
+    "datasetDocumentationUrl" => "https://permalink.openactive.io/dataset-site/open-data-documentation",
     "datasetLanguages" => array("en-GB"),
     "organisationEmail" => "info@better.org.uk",
     "organisationLegalEntity" => "GLL",
@@ -28,7 +28,7 @@ $settings = [
     "dateFirstPublished" => "2019-10-28",
     "openBookingAPIBaseUrl" => "https://reference-implementation.openactive.io/api/openbooking",
     "openBookingAPIAuthenticationAuthorityUrl" => "https://auth.reference-implementation.openactive.io",
-    "openBookingAPIDocumentationUrl" => "https://developer.openactive.io/go/open-booking-api",
+    "openBookingAPIDocumentationUrl" => "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
     "openBookingAPITermsOfServiceUrl" => "https://example.com/api-terms-page",
     "openBookingAPIRegistrationUrl" => "https://example.com/api-landing-page",
     "testSuiteCertificateUrl" => "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/"

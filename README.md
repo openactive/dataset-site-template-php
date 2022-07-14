@@ -77,7 +77,7 @@ $settings = array(
     "dateFirstPublished" => "2019-10-28",
     "openBookingAPIBaseUrl" => "https://reference-implementation.openactive.io/api/openbooking",
     "openBookingAPIAuthenticationAuthorityUrl" => "https://auth.reference-implementation.openactive.io",
-    "openBookingAPIDocumentationUrl" => "https://developer.openactive.io/go/open-booking-api",
+    "openBookingAPIDocumentationUrl" => "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
     "openBookingAPITermsOfServiceUrl" => "https://example.com/api-terms-page",
     "openBookingAPIRegistrationUrl" => "https://example.com/api-landing-page",
     "testSuiteCertificateUrl" => "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
@@ -111,7 +111,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | `openDataFeedBaseUrl`                      | `string`   | The the base URL for the open data feeds |
 | `datasetSiteUrl`                           | `string`   | The URL where this dataset site is displayed (the page's own URL) |
 | `datasetDiscussionUrl`                     | `string`   | The GitHub issues page for the dataset |
-| `datasetDocumentationUrl`                  | `string`   | Any documentation specific to the dataset. Defaults to https://developer.openactive.io/ if not provided, which should be used if no documentation is available. |
+| `datasetDocumentationUrl`                  | `string`   | Any documentation specific to the dataset. Defaults to https://permalink.openactive.io/dataset-site/open-data-documentation if not provided, which should be used if no documentation is available. |
 | `datasetLanguages`                         | `string[]` | The languages available in the dataset, following the IETF BCP 47 standard. Defaults to `array("en-GB")`. |
 | `organisationName`                         | `string`   | The publishing organisation's name |
 | `organisationUrl`                          | `string`   | The publishing organisation's URL |
@@ -126,7 +126,7 @@ Returns a string corresponding to the compiled HTML, based on the `datasetsite.m
 | `dateFirstPublished`                       | `string`   | The date the dataset was first published |  
 | `openBookingAPIBaseUrl`                    | `string`   | The Base URI of this implementation of the Open Booking API |
 | `openBookingAPIAuthenticationAuthorityUrl` | `string`   | The location of the OpenID Provider that must be used to access the API |
-| `openBookingAPIDocumentationUrl`           | `string`   | The URL of documentation related to how to use the Open Booking API. Defaults to https://developer.openactive.io/go/open-booking-api if not provided, which should be used if no documentation is available. |
+| `openBookingAPIDocumentationUrl`           | `string`   | The URL of documentation related to how to use the Open Booking API. Defaults to https://permalink.openactive.io/dataset-site/open-booking-api-documentation if not provided, which should be used if no documentation is available. |
 | `openBookingAPITermsOfServiceUrl`          | `string`   | The URL of terms of service related to the use of this API |
 | `openBookingAPIRegistrationUrl`            | `string`   | The URL of a web page that the Broker may use to obtain access to the API, e.g. via a web form |
 | `testSuiteCertificateUrl`                  | `string`   | The URL of the OpenActive Test Suite certificate for this booking system |
