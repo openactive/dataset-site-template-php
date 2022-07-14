@@ -51,7 +51,7 @@ jobs:
           signoff: false
           branch: ci/update-data-models
           delete-branch: true
-          title: 'Update data models'
+          title: 'Update dataset site template'
           body: |
             Update to the latest version of the [Dataset Site Template](https://github.com/openactive/dataset-site-template)
           labels: |
