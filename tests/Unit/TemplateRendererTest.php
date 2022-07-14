@@ -5,12 +5,16 @@ namespace OpenActive\DatasetSiteTemplate\Tests;
 use OpenActive\DatasetSiteTemplate\FeedType;
 use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 use PHPUnit\Framework\TestCase;
+// assertInternalType has been deprecated by the newer PHPUnit, so a polyfill is used here for PHP 5.6 / PHPUnit 5.7
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 /**
  * TemplateRenderer specific tests.
  */
 class TemplateRendererTest extends TestCase
 {
+    use AssertIsType;
+
     /**
      * Test that the template renderer is an instance of itself
      * (i.e. the constructor worked).
@@ -34,16 +38,7 @@ class TemplateRendererTest extends TestCase
      */
     public function testRenderString($renderer, $data, $supportedFeedTypes)
     {
-        // assertInternalType has been deprecated by the newer PHPUnit, however it is still required here for when the tests run in PHP 5.6 / PHPUnit 5.7
-        $outputHtml = $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes);
-        if (method_exists($this,'assertIsString')) {
-            $this->assertIsString($outputHtml);
-        } else {
-            $this->assertInternalType(
-                "string",
-                $outputHtml
-            );
-        }
+        self::assertIsString($renderer->renderSimpleDatasetSite($data, $supportedFeedTypes));
     }
 
     /**
@@ -54,16 +49,7 @@ class TemplateRendererTest extends TestCase
      */
     public function testRenderStringCSP($renderer, $data, $supportedFeedTypes)
     {
-        // assertInternalType has been deprecated by the newer PHPUnit, however it is still required here for when the tests run in PHP 5.6 / PHPUnit 5.7
-        $outputHtml = $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes, "/example/asset/path");
-        if (method_exists($this,'assertIsString')) {
-            $this->assertIsString($outputHtml);
-        } else {
-            $this->assertInternalType(
-                "string",
-                $outputHtml
-            );
-        }
+        self::assertIsString($renderer->renderSimpleDatasetSite($data, $supportedFeedTypes, "/example/asset/path"));
     }
 
     /**

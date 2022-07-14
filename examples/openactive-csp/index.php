@@ -8,7 +8,7 @@ use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 // Get JSON-LD data
 
 // Create new dataset
-$settings = array(
+$settings = [
     "datasetDiscussionUrl" => "https://github.com/gll-better/opendata",
     "datasetSiteUrl" => "https://halo-odi.legendonlineservices.co.uk/openactive/",
     "datasetDocumentationUrl" => "https://docs.acmebooker.example.com/",
@@ -32,7 +32,7 @@ $settings = array(
     "openBookingAPITermsOfServiceUrl" => "https://example.com/api-terms-page",
     "openBookingAPIRegistrationUrl" => "https://example.com/api-landing-page",
     "testSuiteCertificateUrl" => "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/"
-);
+    ];
 
 $feedTypes = array(
     FeedType::FACILITY_USE,

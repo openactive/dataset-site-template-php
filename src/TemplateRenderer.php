@@ -111,7 +111,7 @@ class TemplateRenderer
         $staticAssetsPathUrl = null
     ) {
         // Pre-process list of feed descriptions
-        $dataFeedHumanisedList = $this->toHumanisedList($dataFeedDescriptions);
+        $dataFeedListHumanisedString = $this->toHumanisedList($dataFeedDescriptions);
         $keywords = array_merge($dataFeedDescriptions, array(
             "Activities",
             "Sports",
@@ -123,10 +123,10 @@ class TemplateRenderer
         $dataset = new Dataset([
             "id" => $settings["datasetSiteUrl"],
             "url" => $settings["datasetSiteUrl"],
-            "name" => $settings["organisationName"] . " " . $dataFeedHumanisedList,
+            "name" => $settings["organisationName"] . " " . $dataFeedListHumanisedString,
             "description" => "Near real-time availability and rich ".
                 "descriptions relating to the ".
-                strtolower($dataFeedHumanisedList)." available from ".
+                strtolower($dataFeedListHumanisedString)." available from ".
                 $settings["organisationName"],
             "keywords" => $keywords,
             "license" => "https://creativecommons.org/licenses/by/4.0/",
@@ -156,7 +156,7 @@ class TemplateRenderer
             $dataset->setAccessService(new WebAPI([
                 "name" => "Open Booking API",
                 "description" => "An API that allows for seamless booking experiences to be created for ".
-                    strtolower($dataFeedHumanisedList)." available from ".
+                    strtolower($dataFeedListHumanisedString)." available from ".
                     $settings["organisationName"],
                 "authenticationAuthority" => $settings["openBookingAPIAuthenticationAuthorityUrl"],
                 "conformsTo" => array(
@@ -176,15 +176,7 @@ class TemplateRenderer
         }
 
         // Only set BookingService if valid platformName provided
-        if((
-            array_key_exists("platformName", $settings) &&
-            is_string($settings["platformName"]) &&
-            strlen($settings["platformName"]) > 0
-        ) || (
-            array_key_exists("testSuiteCertificateUrl", $settings) &&
-            is_string($settings["testSuiteCertificateUrl"]) &&
-            strlen($settings["testSuiteCertificateUrl"]) > 0
-        )) {
+        if(!empty($settings["platformName"]) || !empty($settings["testSuiteCertificateUrl"])) {
             $dataset->setBookingService(new BookingService(array_filter([
                 "name" => isset($settings["platformName"]) ? $settings["platformName"] : null,
                 "url" => isset($settings["platformUrl"]) ? $settings["platformUrl"] : null,
