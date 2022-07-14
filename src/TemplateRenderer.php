@@ -12,6 +12,7 @@ use OpenActive\Models\OA\DataDownload;
 use OpenActive\Models\OA\Dataset;
 use OpenActive\Models\OA\ImageObject;
 use OpenActive\Models\OA\Organization;
+use OpenActive\Models\OA\WebAPI;
 
 /**
  *
@@ -40,9 +41,10 @@ class TemplateRenderer
      *
      * @param array $settings
      * @param FeedType[] $supportedFeedTypes
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
-    public function renderSimpleDatasetSite($settings, $supportedFeedTypes)
+    public function renderSimpleDatasetSite($settings, $supportedFeedTypes, $staticAssetsPathUrl = null)
     {
         // Get available distributionTypes
         $distributionTypeConstants = (
@@ -87,7 +89,8 @@ class TemplateRenderer
         return $this->renderSimpleDatasetSiteFromDataDownloads(
             $settings,
             $dataDownloads,
-            $dataFeedDescriptions
+            $dataFeedDescriptions,
+            $staticAssetsPathUrl
         );
     }
 
@@ -98,15 +101,17 @@ class TemplateRenderer
      * @param array $settings
      * @param DataDownload[] $dataDownloads
      * @param string[] $dataFeedDescriptions
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
     public function renderSimpleDatasetSiteFromDataDownloads(
         $settings,
         $dataDownloads,
-        $dataFeedDescriptions
+        $dataFeedDescriptions,
+        $staticAssetsPathUrl = null
     ) {
         // Pre-process list of feed descriptions
-        $dataFeedHumanisedList = $this->toHumanisedList($dataFeedDescriptions);
+        $dataFeedListHumanisedString = $this->toHumanisedList($dataFeedDescriptions);
         $keywords = array_merge($dataFeedDescriptions, array(
             "Activities",
             "Sports",
@@ -118,15 +123,15 @@ class TemplateRenderer
         $dataset = new Dataset([
             "id" => $settings["datasetSiteUrl"],
             "url" => $settings["datasetSiteUrl"],
-            "name" => $settings["organisationName"] . " " . $dataFeedHumanisedList,
+            "name" => $settings["organisationName"] . " " . $dataFeedListHumanisedString,
             "description" => "Near real-time availability and rich ".
                 "descriptions relating to the ".
-                strtolower($dataFeedHumanisedList)." available from ".
+                strtolower($dataFeedListHumanisedString)." available from ".
                 $settings["organisationName"],
             "keywords" => $keywords,
             "license" => "https://creativecommons.org/licenses/by/4.0/",
             "discussionUrl" => $settings["datasetDiscussionUrl"],
-            "documentation" => $settings["datasetDocumentationUrl"],
+            "documentation" => isset($settings["datasetDocumentationUrl"]) ? $settings["datasetDocumentationUrl"] : "https://permalink.openactive.io/dataset-site/open-data-documentation",
             "inLanguage" => $settings["datasetLanguages"],
             "schemaVersion" => "https://www.openactive.io/modelling-opportunity-data/2.0/",
             "publisher" => new Organization([
@@ -147,34 +152,51 @@ class TemplateRenderer
             "datePublished" => $settings["dateFirstPublished"],
         ]);
 
+        if (isset($settings["openBookingAPIBaseUrl"])) {
+            $dataset->setAccessService(new WebAPI([
+                "name" => "Open Booking API",
+                "description" => "An API that allows for seamless booking experiences to be created for ".
+                    strtolower($dataFeedListHumanisedString)." available from ".
+                    $settings["organisationName"],
+                "authenticationAuthority" => $settings["openBookingAPIAuthenticationAuthorityUrl"],
+                "conformsTo" => array(
+                  "https://openactive.io/open-booking-api/EditorsDraft/"
+                ),
+                "documentation" =>  isset($settings["openBookingAPIDocumentationUrl"]) ? $settings["openBookingAPIDocumentationUrl"] : "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
+                "endpointDescription" => "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
+                "endpointUrl" => $settings["openBookingAPIBaseUrl"],
+                "landingPage" => $settings["openBookingAPIRegistrationUrl"],
+                "termsOfService" => $settings["openBookingAPITermsOfServiceUrl"],
+            ]));
+        }
+        
+        // Also support setting accessService as a legacy feature, which is not documented
         if (isset($settings["accessService"])) {
             $dataset->setAccessService($settings["accessService"]);
         }
 
         // Only set BookingService if valid platformName provided
-        if(
-            array_key_exists("platformName", $settings) &&
-            is_string($settings["platformName"]) &&
-            strlen($settings["platformName"]) > 0
-        ) {
-            $dataset->setBookingService(new BookingService([
-                "name" => $settings["platformName"],
-                "url" => $settings["platformUrl"],
-                "softwareVersion" => $settings["platformSoftwareVersion"],
-            ]));
+        if(!empty($settings["platformName"]) || !empty($settings["testSuiteCertificateUrl"])) {
+            $dataset->setBookingService(new BookingService(array_filter([
+                "name" => isset($settings["platformName"]) ? $settings["platformName"] : null,
+                "url" => isset($settings["platformUrl"]) ? $settings["platformUrl"] : null,
+                "softwareVersion" => isset($settings["platformSoftwareVersion"]) ? $settings["platformSoftwareVersion"] : null,
+                "hasCredential" => isset($settings["testSuiteCertificateUrl"]) ? $settings["testSuiteCertificateUrl"] : null,
+            ])));
         }
 
         // Render compiled template with JSON-LD data
-        return $this->renderDatasetSite($dataset);
+        return $this->renderDatasetSite($dataset, $staticAssetsPathUrl);
     }
 
     /**
      * Render the template from a given OpenActive dataset model.
      *
      * @param \OpenActive\Models\Dataset $dataset The OpenActive model.
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
-    public function renderDatasetSite($dataset)
+    public function renderDatasetSite($dataset, $staticAssetsPathUrl = null)
     {
         if($dataset instanceof OpenActive\Models\OA\Dataset) {
             throw new InvalidArgumentException(
@@ -184,11 +206,21 @@ class TemplateRenderer
             );
         }
 
-        // Get template from FS
-        $template = file_get_contents(__DIR__."/datasetsite.mustache");
+        // Data to pass the mustache template
+        $data = array();
+
+        // Determine which template to use based on whether $staticAssetsPathUrl is set
+        if (is_null($staticAssetsPathUrl)) {
+            $templateFilename = "/datasetsite.mustache";
+        } else {
+            $templateFilename = "/datasetsite-csp.mustache";
+            $data["staticAssetsPathUrl"] = $staticAssetsPathUrl;
+        }
+
+        // Get relevant template from FS
+        $template = file_get_contents(__DIR__.$templateFilename);
 
         // Build data from model's getters
-        $data = array();
         $attributeNames = array(
             "backgroundImage",
             "bookingService",
@@ -203,6 +235,7 @@ class TemplateRenderer
             "publisher",
             "schemaVersion",
             "url",
+            "accessService"
         );
         foreach ($attributeNames as $attributeName) {
             $getterName = "get" . Str::pascal($attributeName);
@@ -225,7 +258,7 @@ class TemplateRenderer
         }
 
         // JSON-LD is the serialized content
-        $data["json"] = Dataset::serialize($dataset, true, true);
+        $data["jsonld"] = Dataset::serialize($dataset, true, true);
 
         // Render compiled template with JSON-LD data
         return $this->mustacheEngine->render($template, $data);

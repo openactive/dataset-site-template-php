@@ -5,12 +5,16 @@ namespace OpenActive\DatasetSiteTemplate\Tests;
 use OpenActive\DatasetSiteTemplate\FeedType;
 use OpenActive\DatasetSiteTemplate\TemplateRenderer;
 use PHPUnit\Framework\TestCase;
+// assertInternalType has been deprecated by the newer PHPUnit, so a polyfill is used here for PHP 5.6 / PHPUnit 5.7
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
 
 /**
  * TemplateRenderer specific tests.
  */
 class TemplateRendererTest extends TestCase
 {
+    use AssertIsType;
+
     /**
      * Test that the template renderer is an instance of itself
      * (i.e. the constructor worked).
@@ -27,17 +31,25 @@ class TemplateRendererTest extends TestCase
     }
 
     /**
-     * Test that the template renderer renders a string.
+     * Test that the template renderer renders a string for the single-file template.
      *
      * @dataProvider templateRendererProvider
      * @return void
      */
     public function testRenderString($renderer, $data, $supportedFeedTypes)
     {
-        $this->assertInternalType(
-            "string",
-            $renderer->renderSimpleDatasetSite($data, $supportedFeedTypes)
-        );
+        self::assertIsString($renderer->renderSimpleDatasetSite($data, $supportedFeedTypes));
+    }
+
+    /**
+     * Test that the template renderer renders a string for the CSP template.
+     *
+     * @dataProvider templateRendererProvider
+     * @return void
+     */
+    public function testRenderStringCSP($renderer, $data, $supportedFeedTypes)
+    {
+        self::assertIsString($renderer->renderSimpleDatasetSite($data, $supportedFeedTypes, "/example/asset/path"));
     }
 
     /**
