@@ -36,7 +36,7 @@ jobs:
         # - The dataset-site-template version number updating within the template in datasetsite.mustache and datasetsite-csp.mustache (affects one line)
         # - Any updates to datasetsite-csp.static.zip
         # git stashing if no material changes allows the next step to close the PR if one is already open
-        run: if [ "$(git diff --numstat | grep -vc '^1\s.*datasetsite\.mustache\|7\s.*datasetsite-csp\.mustache\|.*datasetsite-csp\.static\.zip$')" -eq "0" ]; then git stash; else echo "Material changes found"; fi
+        run: if [ "$(git diff --numstat | grep -vc '^1\s.*datasetsite\.mustache\|8\s.*datasetsite-csp\.mustache\|.*datasetsite-csp\.static\.zip$')" -eq "0" ]; then git stash; else echo "Material changes found"; fi
         working-directory: ./
         
       - name: Create Pull Request
