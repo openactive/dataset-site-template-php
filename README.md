@@ -229,3 +229,7 @@ You can also run a section of the suite by specifying the class's relative path 
 
 For additional information on the commands available for PHPUnit,
 consult [their documentation](https://phpunit.de/manual/4.8/en/installation.html)
+
+### Release
+
+Major version numbers of this library should match those of the `dataset-site-template` on which this library depends. Any updates to the dataset site template files or assets should always be a major version update in both libraries.
