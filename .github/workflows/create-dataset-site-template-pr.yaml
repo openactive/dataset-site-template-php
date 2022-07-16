@@ -54,6 +54,9 @@ jobs:
           title: 'Update dataset site template'
           body: |
             Update to the latest version of the [Dataset Site Template](https://github.com/openactive/dataset-site-template)
+          
+            **Reviewer note:** Major version numbers of this library should match those of the `dataset-site-template` on which this library depends. Any updates to the dataset site template files or assets should always be a major version update in both libraries. Hence this PR, once merged, should be released with a major version bump to match its contents.
+            
           labels: |
             automated pr
           team-reviewers: |
