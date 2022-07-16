@@ -20,7 +20,7 @@ Please find full documentation that covers creation of the accompanying GitHub i
     - [Installation](#installation)
     - [Example](#example)
     - [Running Tests](#running-tests)
-    - [Releases](#releases)
+    - [Release](#release)
 
 ## Requirements
 This project requires PHP >=5.6.
