@@ -33,7 +33,7 @@ jobs:
         
       - name: git stash if material changes have not been made
         # When considering whether it's worth making a PR, ignore the following:
-        # - The dataset-site-template version number updating within the template in datasetsite.mustache and datasetsite-csp.mustache (affects one line)
+        # - The dataset-site-template minor or patch version number updating within the template in datasetsite.mustache and datasetsite-csp.mustache (affects one line)
         # - Any updates to datasetsite-csp.static.zip
         # git stashing if no material changes allows the next step to close the PR if one is already open
         run: if [ "$(git diff --numstat | grep -vc '^1\s.*datasetsite\.mustache\|1\s.*datasetsite-csp\.mustache\|.*datasetsite-csp\.static\.zip$')" -eq "0" ]; then git stash; else echo "Material changes found"; fi
