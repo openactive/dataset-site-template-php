@@ -153,7 +153,7 @@ class TemplateRenderer
         ]);
 
         if (isset($settings["openBookingAPIBaseUrl"])) {
-            $dataset->setAccessService(new WebAPI([
+            $dataset->setAccessService(new WebAPI(array_filter([
                 "name" => "Open Booking API",
                 "description" => "An API that allows for seamless booking experiences to be created for ".
                     strtolower($dataFeedListHumanisedString)." available from ".
@@ -167,7 +167,7 @@ class TemplateRenderer
                 "endpointUrl" => $settings["openBookingAPIBaseUrl"],
                 "landingPage" => $settings["openBookingAPIRegistrationUrl"],
                 "termsOfService" => $settings["openBookingAPITermsOfServiceUrl"],
-            ]));
+            ])));
         }
         
         // Also support setting accessService as a legacy feature, which is not documented

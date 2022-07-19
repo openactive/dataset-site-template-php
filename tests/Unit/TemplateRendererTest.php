@@ -60,7 +60,7 @@ class TemplateRendererTest extends TestCase
         $data = array(
             "datasetDiscussionUrl" => "https://github.com/gll-better/opendata",
             "datasetSiteUrl" => "https://halo-odi.legendonlineservices.co.uk/openactive/",
-            "datasetDocumentationUrl" => "https://docs.acmebooker.example.com/",
+            "datasetDocumentationUrl" => "https://permalink.openactive.io/dataset-site/open-data-documentation",
             "datasetLanguages" => array("en-GB"),
             "organisationEmail" => "info@better.org.uk",
             "organisationLegalEntity" => "GLL",
