@@ -97,7 +97,7 @@ $supportedFeedTypes = array(
 );
 ```
 
-And `$staticAssetsPathUrl` (if required) should be set to the URL path of the directory containing the CSP static asset files (contents of the [CSP compatible static assets archive](/src/datasetsite-csp.static.zip), using the assets archive in this version of the PHP package), without a trailing slash (/).
+And `$staticAssetsPathUrl` (if required) should be set to the URL path of the directory containing the CSP static asset files (contents of the [CSP compatible static assets archive](/src/datasetsite-csp.static.zip), using the assets archive in this version of the PHP package).
 
 
 ### API
@@ -106,7 +106,7 @@ And `$staticAssetsPathUrl` (if required) should be set to the URL path of the di
 
 Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, the provided `$settings`, and `$supportedFeedTypes`.
 
-If `$staticAssetsPathUrl` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/src/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the PHP package. Note that `$staticAssetsPathUrl` must not have a trailing slash (/).
+If `$staticAssetsPathUrl` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/src/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the PHP package.
 
 `$settings` must contain the following keys:
 
@@ -143,7 +143,7 @@ And `$supportedFeedTypes` must be an `array` of `FeedType` constants, which auto
 
 Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, the provided [`$settings`](#settings), `$dataDownloads` and `$dataFeedDescriptions`.
 
-If `$staticAssetsPathUrl` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/src/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the PHP package. Note that `$staticAssetsPathUrl` must not have a trailing slash (/).
+If `$staticAssetsPathUrl` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/src/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the PHP package.
 
 The `$dataDownloads` argument must be an `array` of `\OpenActive\Models\OA\DataDownload` objects, which each describe an available open data feed.
 
@@ -159,7 +159,7 @@ $dataFeedDescriptions = array(
 
 Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided `$dataset`.
 
-If `$staticAssetsPathUrl` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/src/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the PHP package. Note that `$staticAssetsPathUrl` must not have a trailing slash (/).
+If `$staticAssetsPathUrl` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/src/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the PHP package.
 
 The `$dataset` argument must be an object of type `\OpenActive\Models\OA\Dataset`, and must contain the properties required to render the dataset site.
 

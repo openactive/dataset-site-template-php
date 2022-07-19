@@ -41,7 +41,7 @@ class TemplateRenderer
      *
      * @param array $settings
      * @param FeedType[] $supportedFeedTypes
-     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used. Note this value must not have a trailing slash (/).
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
     public function renderSimpleDatasetSite($settings, $supportedFeedTypes, $staticAssetsPathUrl = null)
@@ -101,7 +101,7 @@ class TemplateRenderer
      * @param array $settings
      * @param DataDownload[] $dataDownloads
      * @param string[] $dataFeedDescriptions
-     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used. Note this value must not have a trailing slash (/).
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
     public function renderSimpleDatasetSiteFromDataDownloads(
@@ -193,7 +193,7 @@ class TemplateRenderer
      * Render the template from a given OpenActive dataset model.
      *
      * @param \OpenActive\Models\Dataset $dataset The OpenActive model.
-     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used. Note this value must not have a trailing slash (/).
+     * @param string $staticAssetsPathUrl The location of the self-hosted assets for the CSP-compatible template. If set, the CSP-compatible template will be used.
      * @return string Rendered template
      */
     public function renderDatasetSite($dataset, $staticAssetsPathUrl = null)
@@ -214,7 +214,7 @@ class TemplateRenderer
             $templateFilename = "/datasetsite.mustache";
         } else {
             $templateFilename = "/datasetsite-csp.mustache";
-            $data["staticAssetsPathUrl"] = $staticAssetsPathUrl;
+            $data["staticAssetsPathUrl"] = rtrim($staticAssetsPathUrl, "/");
         }
 
         // Get relevant template from FS
