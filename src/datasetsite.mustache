@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <!--
-  OpenActive Dataset Site Template version 6, from https://unpkg.com/@openactive/dataset-site-template@6.0.0/dist/datasetsite.mustache
+  OpenActive Dataset Site Template version 7, from https://unpkg.com/@openactive/dataset-site-template@7.0.0/dist/datasetsite.mustache
 -->
 <!--
   Design: Identity by HTML5 UP
@@ -1341,7 +1341,7 @@ body {
             <!-- Footer -->
             <footer id="footer">
                 <ul class="copyright">
-                    <li>{{#bookingService}}Platform: <a href="{{url}}">{{name}} {{softwareVersion}}</a>. {{/bookingService}}Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
+                    <li>{{#bookingService.name}}Platform: {{/bookingService.name}}{{#bookingService.url}}<a href="{{.}}">{{/bookingService.url}}{{bookingService.name}}{{#bookingService.softwareVersion}} {{.}}{{/bookingService.softwareVersion}}{{#bookingService.url}}</a>{{/bookingService.url}}{{#bookingService.name}}. {{/bookingService.name}}Design: <a href="http://html5up.net">HTML5 UP</a>.</li>
                 </ul>
             </footer>
         </div>
