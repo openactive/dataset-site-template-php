@@ -23,6 +23,8 @@
     "yoast/phpunit-polyfills": "^1.0"
   },
   "scripts": {
+    "start": "php -S localhost:8080 -t examples/openactive",
+    "start-csp": "php -S localhost:8080 -t examples/openactive-csp",
     "test": "./vendor/bin/phpunit"
   }
 }

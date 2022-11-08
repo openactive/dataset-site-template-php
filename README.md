@@ -202,9 +202,16 @@ composer install
 ```
 
 ### Example
-From a web server capable of interpreting and compiling PHP, navigate to the `/examples/openactive` or `/examples/openactive-csp` folders.
 
-From there you should be able to see the template populated with the JSON-LD data.
+To run the examples using PHP's built in server:
+```bash
+composer start
+```
+or
+```bash
+composer start-csp
+```
+Once running navigate to `localhost:8080` in your browser to view the templates populated with JSON-LD data.
 
 The default mustache templates (`datasetsite.mustache` and `datasetsite-csp.mustache`) are included under the `src` folder.
 
@@ -215,17 +222,17 @@ PHPUnit is used to run tests.
 
 To run the whole suite:
 ```bash
-./vendor/bin/phpunit
+composer test
 ```
 
 If you want to run the whole suite in verbose mode:
 ```bash
-./vendor/bin/phpunit --verbose
+composer test -- --verbose
 ```
 
 You can also run a section of the suite by specifying the class's relative path on which you want to perform tests:
 ```bash
-./vendor/bin/phpunit --verbose tests/Unit/TemplateRendererTest.php
+composer test -- --verbose tests/Unit/TemplateRendererTest.php
 ```
 
 For additional information on the commands available for PHPUnit,
