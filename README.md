@@ -215,17 +215,17 @@ PHPUnit is used to run tests.
 
 To run the whole suite:
 ```bash
-./vendor/bin/phpunit
+composer test
 ```
 
 If you want to run the whole suite in verbose mode:
 ```bash
-./vendor/bin/phpunit --verbose
+composer test -- --verbose
 ```
 
 You can also run a section of the suite by specifying the class's relative path on which you want to perform tests:
 ```bash
-./vendor/bin/phpunit --verbose tests/Unit/TemplateRendererTest.php
+composer test -- --verbose tests/Unit/TemplateRendererTest.php
 ```
 
 For additional information on the commands available for PHPUnit,
