@@ -41,7 +41,7 @@ jobs:
         
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           path: ./
           token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
@@ -59,9 +59,6 @@ jobs:
             
           labels: |
             automated pr
-          team-reviewers: |
-            owners
-            maintainers
           draft: false
 
       - name: Check outputs
