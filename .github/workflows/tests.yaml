@@ -50,7 +50,7 @@ jobs:
         php examples/openactive-csp/index.php > ./output/example-csp.html
 
     - name: Upload example rendering
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ success() || failure() }}
       with:
         name: example-rendering-php-${{ matrix.php-versions }}
